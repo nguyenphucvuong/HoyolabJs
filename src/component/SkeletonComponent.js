@@ -12,7 +12,7 @@ const SkeletonComponent = (skeletonInfo) => {
     skeletonInfo.isButton,
   ];
 
-  console.log(Data);
+  // console.log(Data);
 
   useEffect(() => {
     if (typeof Data === "string") {

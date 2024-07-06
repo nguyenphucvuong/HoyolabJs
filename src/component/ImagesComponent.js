@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { Image } from 'expo-image';
 import { appInfo } from '../constains/appInfo'
 import * as ImageManipulator from "expo-image-manipulator";
+import RowComponent from './RowComponent';
 
 const ImagesComponent = (imagesInfo) => {
     const [Data] = [imagesInfo.Data];
@@ -19,55 +20,99 @@ const ImagesComponent = (imagesInfo) => {
     };
 
     useEffect(() => {
-        handleImage(Data[0]);
+        Data.forEach(element => {
+            handleImage(element);
+        });
+
     }, [Data]);
 
 
     const OneImageContent = () => {
         return imageWidth > imageHeight ? (
-            <>
-                <Image
-                    source={{ uri: Data[0] }}
-                    style={{
-                        width: "100%",
-                        height: appInfo.widthWindows * 0.7,
-                        // minHeight: appInfo.widthWindows * 0.5,
-                        // maxHeight: appInfo.widthWindows * 0.8,
-                        // minWidth: appInfo.widthWindows * 0.5,
-                        // maxWidth: appInfo.widthWindows * 1,
-                        borderRadius: 10,
-                    }} />
-            </>
+            <Image
+                source={{ uri: Data[0] }}
+                style={{
+                    width: "100%",
+                    height: "100%",
+                    borderRadius: 10,
+                }}
+            />
         ) : (
-
-            <View style={{ width: "100%", height: "100%", backgroundColor: "red" }}>
-                <Image
-                    source={{ uri: Data[0] }}
-                    style={{
-                        width: "100%",
-                        height: "100%",
-                        minHeight: appInfo.widthWindows * 0.5,
-                        maxHeight: appInfo.widthWindows * 0.8,
-                        minWidth: appInfo.widthWindows * 0.5,
-                        maxWidth: appInfo.widthWindows * 0.5,
-                        borderRadius: 10,
-
-                    }}
-                />
-            </View>
-
-
+            <Image
+                source={{ uri: Data[0] }}
+                style={{
+                    width: "60%",
+                    height: appInfo.widthWindows * 0.7,
+                    minHeight: appInfo.widthWindows * 0.5,
+                    maxHeight: appInfo.widthWindows * 0.8,
+                    minWidth: appInfo.widthWindows * 0.5,
+                    maxWidth: appInfo.widthWindows * 1,
+                    borderRadius: 10,
+                }} />
         )
+    }
 
+    const TwoOrThreeImageContent = () => {
+        const TwoImageContent = () => {
+            return (
+                <RowComponent maxHeight={appInfo.widthWindows * 0.7}
+                    style={{
+                        justifyContent: "space-between",
+                        overflow: "hidden",
+                        borderRadius: 10,
+                    }}>
+                    <Image
+                        source={{ uri: Data[0] }}
+                        style={{
+                            width: "49%",
+                            height: "100%",
+                        }} />
+                    <Image
+                        source={{ uri: Data[1] }}
+                        style={{
+                            width: "49%",
+                            height: "100%",
+                        }} />
+                </RowComponent>
+            );
+        }
 
+        const ThreeImageContent = () => {
+            return (
+                <RowComponent
+                    maxHeight={appInfo.widthWindows * 0.7}
+                    minHeight={appInfo.widthWindows * 0.45}
+                    style={{
+                        justifyContent: "space-between",
+                        overflow: "hidden",
+                        borderRadius: 10,
+                    }}>
+                    <Image
+                        source={{ uri: Data[0] }}
+                        style={{
+                            width: "32%",
+                            height: "100%",
+                        }} />
+                    <Image
+                        source={{ uri: Data[1] }}
+                        style={{
+                            width: "33%",
+                            height: "100%",
+                        }} />
+                    <Image
+                        source={{ uri: Data[2] }}
+                        style={{
+                            width: "32%",
+                            height: "100%",
+                        }} />
+                </RowComponent>
+            );
+        }
+        return Data.length > 1 && Data.length < 3 ? <TwoImageContent /> : <ThreeImageContent />
 
     }
 
-    const TwoImageContent = () => {
-
-    }
-
-    return <OneImageContent />
+    return Data.length === 1 ? <OneImageContent /> : <TwoOrThreeImageContent />
 }
 
 export default ImagesComponent
