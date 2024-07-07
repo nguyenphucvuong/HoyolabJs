@@ -158,7 +158,8 @@ export default HomeScreen;
 
 const styles = StyleSheet.create({
   box: {
-
+    width: "auto",
+    height: "auto",
   },
   content: {
     width: appInfo.widthWindows,
