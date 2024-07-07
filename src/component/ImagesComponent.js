@@ -9,6 +9,7 @@ const ImagesComponent = (imagesInfo) => {
     const [Data] = [imagesInfo.Data];
     const [imageWidth, setImageWidth] = useState(0);
     const [imageHeight, setImageHeight] = useState(0);
+    // console.log("width", imageWidth, "height", imageHeight);
 
     const handleImage = async (uri) => {
         const { width, height } = await ImageManipulator.manipulateAsync(uri, [], {
@@ -33,7 +34,7 @@ const ImagesComponent = (imagesInfo) => {
                 source={{ uri: Data[0] }}
                 style={{
                     width: "100%",
-                    height: "100%",
+                    height: "80%",
                     borderRadius: 10,
                 }}
             />
@@ -41,12 +42,13 @@ const ImagesComponent = (imagesInfo) => {
             <Image
                 source={{ uri: Data[0] }}
                 style={{
-                    width: "60%",
-                    height: appInfo.widthWindows * 0.7,
-                    minHeight: appInfo.widthWindows * 0.5,
-                    maxHeight: appInfo.widthWindows * 0.8,
-                    minWidth: appInfo.widthWindows * 0.5,
-                    maxWidth: appInfo.widthWindows * 1,
+                    width: imageWidth > appInfo.widthWindows * 0.5 ? appInfo.widthWindows * 0.5 : "100%",
+                    // height: imageHeight > 250 ? 250 : imageHeight,
+                    height: 250,
+                    minWidth: appInfo.widthWindows * 0.4,
+                    maxWidth: appInfo.widthWindows * 0.5,
+                    minHeight: 200,
+                    // maxHeight: 250,
                     borderRadius: 10,
                 }} />
         )
@@ -112,7 +114,16 @@ const ImagesComponent = (imagesInfo) => {
 
     }
 
-    return Data.length === 1 ? <OneImageContent /> : <TwoOrThreeImageContent />
+    if (Data.length === 0) {
+        return <></>
+    } else if (Data.length === 1) {
+        return <OneImageContent />
+    } else if (Data.length === 2 || Data.length === 3) {
+        return <TwoOrThreeImageContent />
+    } else {
+        return <></>
+    }
+
 }
 
 export default ImagesComponent

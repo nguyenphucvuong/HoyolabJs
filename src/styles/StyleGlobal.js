@@ -13,7 +13,12 @@ export const StyleGlobal = StyleSheet.create({
     fontSize: 15,
     fontWeight: "bold",
   },
+  textContent: {
+    fontSize: 13,
+    color: "gray",
+  },
   text: {
     fontSize: 13,
   },
+
 });

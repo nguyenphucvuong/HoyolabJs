@@ -74,9 +74,13 @@ const ButtonsComponent = (infoButton) => {
 
 
   const HashtagButtons = () => {
+    if (hashtag.length === 0) {
+      return <></>
+    }
     const renderHashtagButtons = ({ item }) => {
       return (
         <TouchableOpacity
+          onPress={onPress}
           style={{
             borderRadius: 30,
             justifyContent: "center",
@@ -87,7 +91,8 @@ const ButtonsComponent = (infoButton) => {
             paddingVertical: 5,
             marginLeft: 5,
             flexDirection: "row",
-            backgroundColor: "rgba(215,223,221,0.3)"
+            backgroundColor: "rgba(215,223,221,0.3)",
+
           }}
         >
           <Image
@@ -101,14 +106,16 @@ const ButtonsComponent = (infoButton) => {
             style={{
               width: "auto",
               height: "100%",
-              color: "rgba(47,131,247,1)",
+              color: "rgba(121,141,218,1)",
             }}>{item}</Text>
         </TouchableOpacity>
       )
     }
+
+
     return (
       <FlatList
-        scrollEnabled={true}
+        // scrollEnabled={true}
         data={hashtag}
         renderItem={({ item }) => renderHashtagButtons({ item })}
         keyExtractor={(item) => item}
@@ -121,7 +128,6 @@ const ButtonsComponent = (infoButton) => {
           // backgroundColor: "pink",
         }}
       />
-
 
     )
   }
