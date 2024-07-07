@@ -51,101 +51,101 @@ const HomeScreen = () => {
   return (
     <SafeAreaView>
       <ScrollView>
-
-        <View style={{ ...styles.content, backgroundColor: "pink" }}>
-          {/* Avatar */}
-          <RowComponent
-            height={appInfo.widthWindows / 5.7}
-            style={{ alignItems: "center" }}
-          >
-            <SkeletonComponent isAvatar Data={state.avatar}>
-              <AvatarComponent size={40} round={30} url={state.avatar} />
-            </SkeletonComponent>
-
-            <View
-              style={{
-                height: "80%",
-                width: "55%",
-                justifyContent: "center",
-                paddingLeft: "3%",
-              }}
+        <View style={{ ...styles.box, backgroundColor: "pink" }}>
+          <View style={{ ...styles.content }}>
+            {/* Avatar */}
+            <RowComponent
+              height={appInfo.widthWindows / 5.7}
+              style={{ alignItems: "center" }}
             >
-              <SkeletonComponent Data={state.userName}>
-                <Text style={StyleGlobal.textName}>Tai tồ</Text>
-                <Text style={StyleGlobal.textInfo}>1 giờ trước • Honkai</Text>
+              <SkeletonComponent isAvatar Data={state.avatar}>
+                <AvatarComponent size={40} round={30} url={state.avatar} />
               </SkeletonComponent>
-            </View>
 
-            <SkeletonComponent Data={state.userName} isButton>
-              <ButtonsComponent color="rgba(121,141,218,1)" isFollow onPress={handleAd}>
-                <Text style={{ ...StyleGlobal.text, color: "rgba(121,141,218,1)" }}>Theo dõi</Text>
-              </ButtonsComponent>
+              <View
+                style={{
+                  height: "80%",
+                  width: "55%",
+                  justifyContent: "center",
+                  paddingLeft: "3%",
+                }}
+              >
+                <SkeletonComponent Data={state.userName}>
+                  <Text style={StyleGlobal.textName}>Tai tồ</Text>
+                  <Text style={StyleGlobal.textInfo}>1 giờ trước • Honkai</Text>
+                </SkeletonComponent>
+              </View>
 
-            </SkeletonComponent>
+              <SkeletonComponent Data={state.userName} isButton>
+                <ButtonsComponent color="rgba(121,141,218,1)" isFollow onPress={handleAd}>
+                  <Text style={{ ...StyleGlobal.text, color: "rgba(121,141,218,1)" }}>Theo dõi</Text>
+                </ButtonsComponent>
 
-            <View
+              </SkeletonComponent>
+
+              <View
+                style={{
+                  flex: 1,
+                  width: "100%",
+                  height: "100%",
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
+
+                <ButtonsComponent isMoreAction onPress={handleAd} />
+              </View>
+            </RowComponent>
+
+
+            {/* Content Title */}
+            <RowComponent
+              minHeight={20}
+              maxHeight={40}
               style={{
-                flex: 1,
-                width: "100%",
-                height: "100%",
-                justifyContent: "center",
-                alignItems: "center",
-              }}
-            >
+                flexDirection: "column",
 
-              <ButtonsComponent isMoreAction onPress={handleAd} />
-            </View>
-          </RowComponent>
+              }}>
+              <SkeletonComponent Data={text}>
+                <Text style={StyleGlobal.textTitleContent}>{text}</Text>
+              </SkeletonComponent>
+            </RowComponent>
+
+            {/* Content */}
+            <RowComponent
+              minHeight={texst ? 20 : 0}
+              maxHeight={texst ? 35 : 0}
+              style={{
+                flexDirection: "column",
+
+              }}>
+              <SkeletonComponent Data={text}>
+                <Text style={StyleGlobal.textContent}>{texst}</Text>
+              </SkeletonComponent>
+            </RowComponent>
 
 
-          {/* Content Title */}
-          <RowComponent
-            minHeight={20}
-            maxHeight={40}
-            style={{
-              flexDirection: "column",
-
+            {/* Image Content */}
+            <RowComponent minHeight={appInfo.widthWindows * 0.6} maxHeight={250} style={{
+              marginTop: "2%",
             }}>
-            <SkeletonComponent Data={text}>
-              <Text style={StyleGlobal.textTitleContent}>{text}</Text>
-            </SkeletonComponent>
-          </RowComponent>
-
-          {/* Content */}
-          <RowComponent
-            minHeight={texst ? 20 : 0}
-            maxHeight={texst ? 35 : 0}
-            style={{
-              flexDirection: "column",
-
-            }}>
-            <SkeletonComponent Data={text}>
-              <Text style={StyleGlobal.textContent}>{texst}</Text>
-            </SkeletonComponent>
-          </RowComponent>
+              <ImagesComponent Data={state.images} />
+            </RowComponent>
 
 
-          {/* Image Content */}
-          <RowComponent minHeight={appInfo.widthWindows * 0.6} maxHeight={250} style={{
-            marginTop: "2%",
-          }}>
-            <ImagesComponent Data={state.images} />
-          </RowComponent>
-
-
-          <RowComponent height={state.hashtag.length === 0 ? 0 : 45} backgroundColor={"red"}>
-            <ButtonsComponent color="green" isHashtagButtons onPress={handleAd} hashtag={state.hashtag} />
-          </RowComponent >
+            <RowComponent height={state.hashtag.length === 0 ? 0 : 45} backgroundColor={"red"}>
+              <ButtonsComponent color="green" isHashtagButtons onPress={handleAd} hashtag={state.hashtag} />
+            </RowComponent >
 
 
 
-          <RowComponent >
+            <RowComponent >
 
-          </RowComponent >
+            </RowComponent >
 
-          <RowComponent ></RowComponent>
+            <RowComponent ></RowComponent>
+          </View>
         </View>
-
 
 
 
