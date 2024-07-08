@@ -3,28 +3,52 @@ import React from "react";
 import { Image } from 'expo-image';
 
 const ButtonsComponent = (infoButton) => {
-  const [children, color, isFollow, onPress, isMoreAction, isHashtagButtons, hashtag] = [
+  const [children, color, style, isFollow, onPress, isMoreAction, isHashtag, hashtag, isLike, isShowCmt] = [
     infoButton.children,
     infoButton.color,
+    infoButton.style,
     infoButton.isFollow,
     infoButton.onPress,
     infoButton.isMoreAction,
-    infoButton.isHashtagButtons,
+    infoButton.isHashtag,
     infoButton.hashtag,
+    infoButton.isLike,
+    infoButton.isShowCmt,
   ];
+
+  const LikeButton = () => {
+    return (
+      <TouchableOpacity
+        onPress={onPress}
+        style={[{
+          borderColor: color,
+          borderRadius: 100,
+          borderWidth: 2,
+          justifyContent: "center",
+          alignItems: "center",
+          width: "22%",
+          height: "50%",
+          paddingHorizontal: "1%",
+        }, style && style]
+        }
+      >
+        {children}
+      </TouchableOpacity >
+    );
+  }
 
   const MoreActionButton = () => {
     return (
 
       <TouchableOpacity
         onPress={onPress}
-        style={{
+        style={[{
           borderRadius: 30,
           justifyContent: "center",
           alignItems: "center",
           width: "30%",
           height: "30%",
-        }}>
+        }, style && style]}>
         <Image
           style={{
             width: "100%",
@@ -38,10 +62,10 @@ const ButtonsComponent = (infoButton) => {
   };
 
   const FollowButton = () => {
-    return isFollow ? (
+    return (
       <TouchableOpacity
         onPress={onPress}
-        style={{
+        style={[{
           borderColor: color,
           borderRadius: 100,
           borderWidth: 2,
@@ -50,22 +74,7 @@ const ButtonsComponent = (infoButton) => {
           width: "22%",
           height: "50%",
           paddingHorizontal: "2%",
-        }}
-      >
-        {children}
-      </TouchableOpacity>
-    ) : (
-      <TouchableOpacity
-        onPress={onPress}
-        style={{
-          borderColor: color,
-          borderRadius: 100,
-          justifyContent: "center",
-          alignItems: "center",
-          width: "22%",
-          height: "50%",
-          paddingHorizontal: "2%",
-        }}
+        }, style && style]}
       >
         {children}
       </TouchableOpacity>
@@ -74,14 +83,12 @@ const ButtonsComponent = (infoButton) => {
 
 
   const HashtagButtons = () => {
-    if (hashtag.length === 0) {
-      return <></>
-    }
+
     const renderHashtagButtons = ({ item }) => {
       return (
         <TouchableOpacity
           onPress={onPress}
-          style={{
+          style={[{
             borderRadius: 30,
             justifyContent: "center",
             alignItems: "center",
@@ -89,11 +96,11 @@ const ButtonsComponent = (infoButton) => {
             height: "90%",
             paddingHorizontal: 10,
             paddingVertical: 5,
-            marginLeft: 5,
+            marginEnd: 8,
             flexDirection: "row",
             backgroundColor: "rgba(215,223,221,0.3)",
 
-          }}
+          }, style && style]}
         >
           <Image
             style={{
@@ -104,8 +111,7 @@ const ButtonsComponent = (infoButton) => {
             contentFit="cover" />
           <Text
             style={{
-              width: "auto",
-              height: "100%",
+              fontSize: 12,
               color: "rgba(121,141,218,1)",
             }}>{item}</Text>
         </TouchableOpacity>
@@ -136,7 +142,7 @@ const ButtonsComponent = (infoButton) => {
     return <FollowButton />;
   } else if (isMoreAction) {
     return <MoreActionButton />;
-  } else if (isHashtagButtons) {
+  } else if (isHashtag) {
     return <HashtagButtons />;
   }
   else {

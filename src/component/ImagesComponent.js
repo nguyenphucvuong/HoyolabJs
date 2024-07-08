@@ -5,6 +5,7 @@ import { appInfo } from '../constains/appInfo'
 import * as ImageManipulator from "expo-image-manipulator";
 import RowComponent from './RowComponent';
 
+
 const ImagesComponent = (imagesInfo) => {
     const [Data] = [imagesInfo.Data];
     const [imageWidth, setImageWidth] = useState(0);
@@ -34,7 +35,7 @@ const ImagesComponent = (imagesInfo) => {
                 source={{ uri: Data[0] }}
                 style={{
                     width: "100%",
-                    height: "80%",
+                    height: "100%",
                     borderRadius: 10,
                 }}
             />
