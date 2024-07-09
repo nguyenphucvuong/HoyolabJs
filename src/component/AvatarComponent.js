@@ -3,17 +3,17 @@ import React from "react";
 import { Image } from "expo-image";
 
 const AvatarComponent = (infoImage) => {
-  //   const { size, round, url } = { infoImage };
-  //   console.log(infoImage.size, infoImage.round, infoImage.url);
+  const [size, round, url, style] = [infoImage.size, infoImage.round, infoImage.url, infoImage.style];
+
   return (
     <Image
-      style={{
-        width: infoImage.size,
-        height: infoImage.size,
-        borderRadius: infoImage.round ? 100 : 0,
-      }}
+      style={[{
+        width: size,
+        height: size,
+        borderRadius: round ? 100 : 0,
+      }, style && style]}
       source={{
-        uri: infoImage.url,
+        uri: url,
       }}
       contentFit="cover"
     />

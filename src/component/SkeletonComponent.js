@@ -54,7 +54,7 @@ const SkeletonComponent = (skeletonInfo) => {
     return isAvatar ? (
       <>
         {isLoading ? (
-          <Skeleton circle style={{ width: 50, height: 50 }} />
+          <Skeleton circle style={{ width: 40, height: 40 }} />
         ) : (
           children
         )}
