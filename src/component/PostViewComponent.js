@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, TextInput, Animated, Pressable, Button, Modal } from "react-native";
+import { StyleSheet, Text, View, TextInput, Animated, Pressable, Button, Modal, TouchableWithoutFeedback } from "react-native";
 import React, { useState, useRef } from "react";
 import { TapGestureHandler, State } from 'react-native-gesture-handler';
 
@@ -91,7 +91,6 @@ const PostViewComponent = () => {
     const translateY = useState(new Animated.Value(appInfo.heightWindows))[0]; // Start offscreen
 
     const handleShowInput = () => {
-        console.log("true")
         setIsVisible(true);
         Animated.timing(translateY, {
             toValue: 0,
@@ -345,25 +344,24 @@ const PostViewComponent = () => {
 
                 <Modal
                     visible={isVisible}
-                    animationType="slide"
                     transparent={true}
                     onRequestClose={handleHideInput}
                 >
-                    {isVisible && (
-                        <Animated.View style={[styles.animatedContainer, { transform: [{ translateY }] }]}>
-                            <TextInput
-                                placeholder="Đăng bình luận"
-                                style={styles.inputQuickCmt}
-                                autoFocus={true}
-                                multiline
-                            />
-                            <Button title="Gửi" onPress={handleHideInput} />
-                        </Animated.View>
-                    )}
+                    <TouchableWithoutFeedback onPress={handleHideInput}>
+                        <View style={{ flex: 1, backgroundColor: 'rgba(0,0,0,0.5)' }} >
+                            <Animated.View style={[styles.animatedContainer, { transform: [{ translateY }] }]}>
+                                <TextInput
+                                    placeholder="Đăng bình luận"
+                                    style={styles.inputQuickCmt}
+                                    autoFocus={true}
+                                    multiline
+                                />
+                                <Button title="Gửi" onPress={handleHideInput} />
+                            </Animated.View>
+                        </View>
+                    </TouchableWithoutFeedback>
                 </Modal>
-
             </View>
-
         </View >
     )
 }
@@ -387,6 +385,7 @@ const styles = StyleSheet.create({
 
     },
     animatedContainer: {
+        flex: 1,
         position: 'absolute',
         bottom: 0,
         left: 0,

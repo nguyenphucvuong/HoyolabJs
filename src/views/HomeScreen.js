@@ -27,6 +27,7 @@ const HomeScreen = () => {
         <ScrollView>
           <View style={StyleGlobal.container}>
             <PostViewComponent></PostViewComponent>
+
           </View>
         </ScrollView>
       </SafeAreaView >
