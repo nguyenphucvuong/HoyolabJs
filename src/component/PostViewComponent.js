@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, TextInput, Animated, Pressable, Button } from "react-native";
+import { StyleSheet, Text, View, TextInput, Animated, Pressable, Button, Modal } from "react-native";
 import React, { useState, useRef } from "react";
 import { TapGestureHandler, State } from 'react-native-gesture-handler';
 
@@ -342,17 +342,26 @@ const PostViewComponent = () => {
                             </View>
                         </RowComponent>}
                 />
-                {isVisible && (
-                    <Animated.View style={[styles.animatedContainer, { transform: [{ translateY }] }]}>
-                        <TextInput
-                            placeholder="Đăng bình luận"
-                            style={styles.inputQuickCmt}
-                            autoFocus={true}
-                            multiline
-                        />
-                        <Button title="Gửi" onPress={handleHideInput} />
-                    </Animated.View>
-                )}
+
+                <Modal
+                    visible={isVisible}
+                    animationType="slide"
+                    transparent={true}
+                    onRequestClose={handleHideInput}
+                >
+                    {isVisible && (
+                        <Animated.View style={[styles.animatedContainer, { transform: [{ translateY }] }]}>
+                            <TextInput
+                                placeholder="Đăng bình luận"
+                                style={styles.inputQuickCmt}
+                                autoFocus={true}
+                                multiline
+                            />
+                            <Button title="Gửi" onPress={handleHideInput} />
+                        </Animated.View>
+                    )}
+                </Modal>
+
             </View>
 
         </View >
@@ -391,6 +400,7 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.2,
         shadowRadius: 5,
         elevation: 10,
+
     },
     inputQuickCmt: {
         height: 150,
