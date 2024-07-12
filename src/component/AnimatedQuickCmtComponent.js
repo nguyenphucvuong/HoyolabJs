@@ -1,15 +1,20 @@
-import React, { useState } from 'react';
-import { View, TextInput, Button, Animated, StyleSheet, Dimensions } from 'react-native';
+import React, { Children, useState } from 'react';
+import { View, TextInput, Button, Animated, StyleSheet, Dimensions, Pressable } from 'react-native';
 import { TapGestureHandler, State } from 'react-native-gesture-handler';
 import { appInfo } from '../constains/appInfo';
 
 const { height } = Dimensions.get('window');
 
-const AnimatedQuickCmtComponent = () => {
+const AnimatedQuickCmtComponent = (data) => {
+    const [children] = [data.children];
+
     const [isVisible, setIsVisible] = useState(false);
-    const translateY = useState(new Animated.Value(height))[0]; // Start offscreen
+    const translateY = useState(new Animated.Value(appInfo.heightWindows))[0]; // Start offscreen
+
+
 
     const handleShowInput = () => {
+        console.log("true")
         setIsVisible(true);
         Animated.timing(translateY, {
             toValue: 0,
@@ -20,7 +25,7 @@ const AnimatedQuickCmtComponent = () => {
 
     const handleHideInput = () => {
         Animated.timing(translateY, {
-            toValue: height,
+            toValue: appInfo.heightWindows,
             duration: 300,
             useNativeDriver: true,
         }).start(() => setIsVisible(false));
@@ -28,11 +33,12 @@ const AnimatedQuickCmtComponent = () => {
 
     return (
         <View style={styles.container}>
-            <TapGestureHandler onHandlerStateChange={handleShowInput}>
-                <View style={styles.placeholder}>
-                    <TextInput placeholder="Tôi có lời muốn nói..." style={styles.placeholderInput} editable={false} />
-                </View>
-            </TapGestureHandler>
+            {/* <TapGestureHandler onHandlerStateChange={handleShowInput}> */}
+            <Pressable onPress={handleShowInput} style={styles.placeholder}>
+                <TextInput onPress={handleShowInput} placeholder="Tôi có lời muốn nói..." style={styles.placeholderInput} editable={false} />
+            </Pressable>
+            {/* {children} */}
+            {/* </TapGestureHandler> */}
 
             {isVisible && (
                 <Animated.View style={[styles.animatedContainer, { transform: [{ translateY }] }]}>

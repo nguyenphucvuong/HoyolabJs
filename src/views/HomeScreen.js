@@ -21,22 +21,16 @@ import AnimatedQuickCmtComponent from "../component/AnimatedQuickCmtComponent";
 const HomeScreen = () => {
 
   return (
-    <SafeAreaView>
-      <ScrollView>
-        <PostViewComponent></PostViewComponent>
-        {/* <PostViewComponent></PostViewComponent>
-        <PostViewComponent></PostViewComponent>
-        <PostViewComponent></PostViewComponent>
-        <PostViewComponent></PostViewComponent>
-        <PostViewComponent></PostViewComponent> */}
-      </ScrollView>
-    </SafeAreaView >
+    <GestureHandlerRootView style={{ flex: 1 }}>
 
-    // <GestureHandlerRootView style={{ flex: 1, backgroundColor: "red" }}>
-    //   <AnimatedQuickCmtComponent />
-    // </GestureHandlerRootView>
+      <SafeAreaView>
+        <ScrollView>
+          <PostViewComponent></PostViewComponent>
+        </ScrollView>
+      </SafeAreaView >
+      {/* <AnimatedQuickCmtComponent></AnimatedQuickCmtComponent> */}
 
-
+    </GestureHandlerRootView>
   );
 };
 
