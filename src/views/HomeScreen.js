@@ -25,10 +25,18 @@ const HomeScreen = () => {
 
       <SafeAreaView>
         <ScrollView>
-          <PostViewComponent></PostViewComponent>
+          <View style={StyleGlobal.container}>
+            <PostViewComponent></PostViewComponent>
+          </View>
         </ScrollView>
       </SafeAreaView >
-      {/* <AnimatedQuickCmtComponent></AnimatedQuickCmtComponent> */}
+      {/* <AnimatedQuickCmtComponent></AnimatedQuickCmtComponent>
+      <AnimatedQuickCmtComponent></AnimatedQuickCmtComponent>
+      <AnimatedQuickCmtComponent></AnimatedQuickCmtComponent>
+      <AnimatedQuickCmtComponent></AnimatedQuickCmtComponent>
+      <AnimatedQuickCmtComponent></AnimatedQuickCmtComponent>
+      <AnimatedQuickCmtComponent></AnimatedQuickCmtComponent> */}
+
 
     </GestureHandlerRootView>
   );
@@ -37,5 +45,8 @@ const HomeScreen = () => {
 export default HomeScreen;
 
 const styles = StyleSheet.create({
-
+  container: {
+    flex: 1,
+    justifyContent: 'flex-end',
+  },
 });

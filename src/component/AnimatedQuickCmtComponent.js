@@ -35,7 +35,7 @@ const AnimatedQuickCmtComponent = (data) => {
         <View style={styles.container}>
             {/* <TapGestureHandler onHandlerStateChange={handleShowInput}> */}
             <Pressable onPress={handleShowInput} style={styles.placeholder}>
-                <TextInput onPress={handleShowInput} placeholder="Tôi có lời muốn nói..." style={styles.placeholderInput} editable={false} />
+                <TextInput placeholder="Tôi có lời muốn nói..." style={styles.placeholderInput} editable={false} />
             </Pressable>
             {/* {children} */}
             {/* </TapGestureHandler> */}
