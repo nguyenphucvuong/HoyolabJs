@@ -38,6 +38,6 @@ const RowComponent = (rowInfo) => {
   );
 };
 
-export default RowComponent;
+export default React.memo(RowComponent);
 
 const styles = StyleSheet.create({});

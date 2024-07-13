@@ -1,9 +1,11 @@
 import { StyleSheet, Text, View, TextInput, Animated, Pressable, Button, Modal, TouchableWithoutFeedback } from "react-native";
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useCallback, useMemo } from "react";
 import { TapGestureHandler, State } from 'react-native-gesture-handler';
 
 
 import { appInfo } from "../constains/appInfo";
+import { data } from "../constains/data";
+
 import { StyleGlobal } from "../styles/StyleGlobal";
 import {
     AvatarComponent,
@@ -18,60 +20,20 @@ import RowComponent from "../component/RowComponent";
 
 
 const PostViewComponent = () => {
-    let text = `Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum
-  aperiam exercitationem aliquid, repellendus quae alias dolores
-  eligendi ea beatae vitae quis doloremque quibusdam, molestias
-  non. Perspiciatis nemo laudantium rerum laboriosam.`;
-    text = text.substring(0, 120);
-
-    let texts = `Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum
-  aperiam exercitationem aliquid, repellendus quae alias dolores
-  eligendi ea beatae vitae quis doloremque quibusdam, molestias
-  non. Perspiciatis nemo laudantium rerum laboriosam.`;
-    const state =
-    {
-        id: "1",
-        userId: "1",
-        userName: "Tai tồ",
-        avatar:
-            "https://vnn-imgs-a1.vgcloud.vn/vnreview.vn/image/11/44/57/1144578.jpg",
-        creatAt: " 1 giờ trước - Honkai",
-        game: "Honkai Impact 3rd",
-        content: `Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum
-    aperiam exercitationem aliquid, repellendus quae alias dolores
-    eligendi ea beatae vitae quis doloremque quibusdam, molestias
-    non. Perspiciatis nemo laudantium rerum laboriosam.`,
-        images: [
-            // "https://upload-os-bbs.hoyolab.com/upload/2024/05/12/111816991/034be374ffb331e6b0dbc16ed3c0fbf6_933372970025389044.jpg",
-            // "https://upload-os-bbs.hoyolab.com/upload/2024/05/01/283700571/d214ba18907113f365ccf11acac7360d_8045971794910383490.jpg",
-            "https://upload-os-bbs.hoyolab.com/upload/2024/05/14/184133439/dd0fd8f3fd576a0142658de44ac859f7_1810763935896167165.jpg",
-            "https://upload-os-bbs.hoyolab.com/upload/2024/07/03/318782826/47cb4ff0db4ca986c6775cc66d10493f_5811412000668980395.png?x-oss-process=image%2Fresize%2Cs_1000%2Fauto-orient%2C0%2Finterlace%2C1%2Fformat%2Cwebp%2Fquality%2Cq_70",
-        ],
-        hashtag: [
-            "Honkai Impact 3rd",
-            "Mihoyo",
-            "Honkai",
-            "https://upload-os-bbs.hoyolab.com/upload/2024/05/12/111816991/034be374ffb331e6b0dbc16ed3c0fbf6_933372970025389044.jpg",
-            "https://upload-os-bbs.hoyolab.com/upload/2024/05/01/283700571/d214ba18907113f365ccf11acac7360d_8045971794910383490.jpg",
-            "https://upload-os-bbs.hoyolab.com/upload/2024/05/14/184133439/dd0fd8f3fd576a0142658de44ac859f7_1810763935896167165.jpg",
-            "https://upload-os-bbs.hoyolab.com/upload/2024/07/03/318782826/47cb4ff0db4ca986c6775cc66d10493f_5811412000668980395.png?x-oss-process=image%2Fresize%2Cs_1000%2Fauto-orient%2C0%2Finterlace%2C1%2Fformat%2Cwebp%2Fquality%2Cq_70",
-        ]
-    };
-
 
 
     const [expanded, setExpanded] = useState(false);
     const animation = useRef(new Animated.Value(0)).current;
 
-    const toggleExpand = () => {
+    const toggleExpand = (() => {
         setExpanded(!expanded);
 
         Animated.timing(animation, {
             toValue: expanded ? 0 : 1,
-            duration: 300,
+            duration: 400,
             useNativeDriver: false,
         }).start();
-    };
+    });
     const height = animation.interpolate({
         inputRange: [0, 1],
         outputRange: [0, 50], // Adjust the outputRange values as per your requirement
@@ -95,7 +57,7 @@ const PostViewComponent = () => {
         Animated.timing(translateY, {
             toValue: 0,
             duration: 300,
-            useNativeDriver: false,
+            useNativeDriver: true,
         }).start();
     };
 
@@ -103,7 +65,7 @@ const PostViewComponent = () => {
         Animated.timing(translateY, {
             toValue: appInfo.heightWindows,
             duration: 300,
-            useNativeDriver: false,
+            useNativeDriver: true,
         }).start(() => setIsVisible(false));
     };
 
@@ -111,7 +73,7 @@ const PostViewComponent = () => {
     return (
         <View style={{
             ...styles.box,
-            // backgroundColor: "pink",
+            backgroundColor: "pink",
         }}>
 
             <View style={{ ...styles.content }}>
@@ -120,8 +82,8 @@ const PostViewComponent = () => {
                     height={appInfo.widthWindows / 5.7}
                     style={{ alignItems: "center" }}
                 >
-                    <SkeletonComponent isAvatar Data={state.avatar}>
-                        <AvatarComponent size={40} round={30} url={state.avatar} />
+                    <SkeletonComponent isAvatar Data={data.state.avatar}>
+                        <AvatarComponent size={40} round={30} url={data.state.avatar} />
                     </SkeletonComponent>
 
                     <View
@@ -132,20 +94,20 @@ const PostViewComponent = () => {
                             paddingLeft: "3%",
                         }}
                     >
-                        <SkeletonComponent Data={state.userId}>
+                        <SkeletonComponent Data={data.state.userId}>
                             <Text style={StyleGlobal.textName}>Tai tồ</Text>
                             <Text style={StyleGlobal.textInfo}>1 giờ trước • Honkai</Text>
                         </SkeletonComponent>
                     </View>
 
-                    <SkeletonComponent Data={state.userId} isButton>
+                    <SkeletonComponent Data={data.state.userId} isButton>
                         <ButtonsComponent color="rgba(121,141,218,1)" isFollow onPress={handleAd}>
                             <Text style={{ ...StyleGlobal.text, color: "rgba(121,141,218,1)" }}>Theo dõi</Text>
                         </ButtonsComponent>
 
                     </SkeletonComponent>
 
-                    <SkeletonComponent Data={state.userId} isButton>
+                    <SkeletonComponent Data={data.state.userId} isButton>
                         <View
                             style={{
                                 flex: 1,
@@ -171,26 +133,26 @@ const PostViewComponent = () => {
 
                     }}>
 
-                    <SkeletonComponent Data={text}>
-                        <Text style={StyleGlobal.textTitleContent}>{text}</Text>
+                    <SkeletonComponent Data={data.text}>
+                        <Text style={StyleGlobal.textTitleContent}>{data.text}</Text>
                     </SkeletonComponent>
                 </RowComponent>
 
                 {/* Content */}
                 <RowComponent
-                    minHeight={texts ? 20 : 0}
-                    maxHeight={texts ? 35 : 0}
+                    minHeight={data.texts ? 20 : 0}
+                    maxHeight={data.texts ? 35 : 0}
                     style={{
                         flexDirection: "column",
 
                     }}>
-                    <HandleIsEmpty length={texts.length} view={<Text style={StyleGlobal.textContent}>{texts}</Text>} />
+                    <HandleIsEmpty length={data.texts.length} view={<Text style={StyleGlobal.textContent}>{data.texts}</Text>} />
 
                 </RowComponent>
 
                 {/* Image Content */}
                 <HandleIsEmpty
-                    length={state.images.length}
+                    length={data.state.images.length}
                     view={
                         <RowComponent
                             minHeight={appInfo.widthWindows * 0.45}
@@ -200,16 +162,16 @@ const PostViewComponent = () => {
                             style={{
                                 marginTop: "2%",
                             }}>
-                            <ImagesComponent Data={state.images} />
+                            <ImagesComponent Data={data.state.images} />
                         </RowComponent>}
                 />
 
                 {/* Hashtag */}
                 <RowComponent
-                    height={state.hashtag.length === 0 ? 0 : 45}
+                    height={data.state.hashtag.length === 0 ? 0 : 45}
                     width={appInfo.widthWindows - (appInfo.widthWindows / 100 * 5)}
                 >
-                    <ButtonsComponent color="green" isHashtag onPress={handleAd} hashtag={state.hashtag} />
+                    <ButtonsComponent color="green" isHashtag onPress={handleAd} hashtag={data.state.hashtag} />
                 </RowComponent >
 
                 {/* Quick Comment */}
@@ -223,7 +185,7 @@ const PostViewComponent = () => {
                             alignContent: "center",
                             justifyContent: "center",
                         }}>
-                        <AvatarComponent size={40} round={30} url={state.avatar} style={{ marginRight: "3%" }} />
+                        <AvatarComponent size={40} round={30} url={data.state.avatar} style={{ marginRight: "3%" }} />
                         <Pressable onPress={handleShowInput} style={{
                             width: "100%",
                             height: 30,
@@ -243,11 +205,29 @@ const PostViewComponent = () => {
                     </RowComponent>
                 </Animated.View>
 
-
+                <Modal
+                    visible={isVisible}
+                    transparent={true}
+                    onRequestClose={handleHideInput}
+                >
+                    <TouchableWithoutFeedback onPress={handleHideInput}>
+                        <View style={{ flex: 1, backgroundColor: 'rgba(0,0,0,0.5)' }} >
+                            <Animated.View style={[styles.animatedContainer, { transform: [{ translateY }] }]}>
+                                <TextInput
+                                    placeholder="Đăng bình luận"
+                                    style={styles.inputQuickCmt}
+                                    autoFocus={true}
+                                    multiline
+                                />
+                                <Button title="Gửi" onPress={handleHideInput} />
+                            </Animated.View>
+                        </View>
+                    </TouchableWithoutFeedback>
+                </Modal>
 
                 {/* Like, Comment, View */}
                 <HandleIsEmpty
-                    length={state.id.length}
+                    length={data.state.id.length}
                     view={
                         <RowComponent
                             height={40}
@@ -342,31 +322,13 @@ const PostViewComponent = () => {
                         </RowComponent>}
                 />
 
-                <Modal
-                    visible={isVisible}
-                    transparent={true}
-                    onRequestClose={handleHideInput}
-                >
-                    <TouchableWithoutFeedback onPress={handleHideInput}>
-                        <View style={{ flex: 1, backgroundColor: 'rgba(0,0,0,0.5)' }} >
-                            <Animated.View style={[styles.animatedContainer, { transform: [{ translateY }] }]}>
-                                <TextInput
-                                    placeholder="Đăng bình luận"
-                                    style={styles.inputQuickCmt}
-                                    autoFocus={true}
-                                    multiline
-                                />
-                                <Button title="Gửi" onPress={handleHideInput} />
-                            </Animated.View>
-                        </View>
-                    </TouchableWithoutFeedback>
-                </Modal>
+
             </View>
         </View >
     )
 }
 
-export default PostViewComponent
+export default React.memo(PostViewComponent)
 
 const styles = StyleSheet.create({
     box: {

@@ -67,6 +67,6 @@ const SkeletonComponent = (skeletonInfo) => {
   return isButton ? <>{!isLoading && children}</> : <AvatarComponent />;
 };
 
-export default SkeletonComponent;
+export default React.memo(SkeletonComponent);
 
 const styles = StyleSheet.create({});

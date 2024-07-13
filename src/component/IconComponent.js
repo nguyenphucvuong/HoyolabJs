@@ -39,6 +39,6 @@ const IconComponent = (Data) => {
     )
 };
 
-export default IconComponent
+export default React.memo(IconComponent);
 
 const styles = StyleSheet.create({})

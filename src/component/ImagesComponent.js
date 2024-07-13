@@ -127,6 +127,6 @@ const ImagesComponent = (imagesInfo) => {
 
 }
 
-export default ImagesComponent
+export default React.memo(ImagesComponent);
 
 const styles = StyleSheet.create({})

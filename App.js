@@ -4,9 +4,6 @@ import { HomeScreen } from './src/views';
 
 export default function App() {
   return (
-
-
-
     <HomeScreen />
   );
 }

@@ -152,6 +152,6 @@ const ButtonsComponent = (infoButton) => {
 
 };
 
-export default ButtonsComponent;
+export default React.memo(ButtonsComponent);
 
 const styles = StyleSheet.create({});
