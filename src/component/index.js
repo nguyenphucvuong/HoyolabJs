@@ -1,7 +1,8 @@
-import AvatarComponent from "./AvatarComponent";
+import AvatarEx from "./AvatarComponent";
 import SkeletonComponent from "./SkeletonComponent";
 import ButtonsComponent from "./ButtonsComponent";
-import ImagesComponent from "./ImagesComponent";
-import IconComponent from "./IconComponent";
+import ImagesPostComponent from "./ImagesPostComponent";
+// import AnimatedQuickCmtComponent from "./AnimatedQuickCmtComponent";
+import CmtBoxComponent from "./CmtBoxComponent";
 
-export { AvatarComponent, SkeletonComponent, ButtonsComponent, ImagesComponent, IconComponent };
+export { AvatarEx, SkeletonComponent, ButtonsComponent, ImagesPostComponent, CmtBoxComponent };

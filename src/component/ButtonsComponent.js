@@ -3,10 +3,12 @@ import React from "react";
 import { Image } from 'expo-image';
 
 const ButtonsComponent = (infoButton) => {
-  const [children, color, style, isFollow, onPress, isMoreAction, isHashtag, hashtag, isLike, isShowCmt] = [
+  const [children, color, style, render, isButton, isFollow, onPress, isMoreAction, isHashtag, hashtag, isLike, isShowCmt, isSendCmt] = [
     infoButton.children,
     infoButton.color,
     infoButton.style,
+    infoButton.render,
+    infoButton.isButton,
     infoButton.isFollow,
     infoButton.onPress,
     infoButton.isMoreAction,
@@ -14,73 +16,23 @@ const ButtonsComponent = (infoButton) => {
     infoButton.hashtag,
     infoButton.isLike,
     infoButton.isShowCmt,
+    infoButton.isSendCmt,
   ];
 
-  const LikeButton = () => {
+
+  const NormalButton = () => {
+
     return (
       <TouchableOpacity
         onPress={onPress}
         style={[{
-          borderColor: color,
-          borderRadius: 100,
-          borderWidth: 2,
-          justifyContent: "center",
-          alignItems: "center",
-          width: "22%",
-          height: "50%",
-          paddingHorizontal: "1%",
-        }, style && style]
-        }
-      >
-        {children}
-      </TouchableOpacity >
-    );
-  }
-
-  const MoreActionButton = () => {
-    return (
-
-      <TouchableOpacity
-        onPress={onPress}
-        style={[{
-          borderRadius: 30,
-          justifyContent: "center",
-          alignItems: "center",
-          width: "30%",
-          height: "30%",
-        }, style && style]}>
-        <Image
-          style={{
-            width: "100%",
-            height: "100%",
-          }}
-          source={require('../../assets/dots_vertical-512.jpg')}
-          contentFit="cover" />
-      </TouchableOpacity>
-
-    );
-  };
-
-  const FollowButton = () => {
-    return (
-      <TouchableOpacity
-        onPress={onPress}
-        style={[{
-          borderColor: color,
-          borderRadius: 100,
-          borderWidth: 2,
-          justifyContent: "center",
-          alignItems: "center",
-          width: "22%",
-          height: "50%",
-          paddingHorizontal: "2%",
+          color: color,
         }, style && style]}
       >
         {children}
       </TouchableOpacity>
     );
-  };
-
+  }
 
   const HashtagButtons = () => {
 
@@ -112,7 +64,7 @@ const ButtonsComponent = (infoButton) => {
           <Text
             style={{
               fontSize: 12,
-              color: "rgba(121,141,218,1)",
+              color: "rgba(101,128,255,1)",
             }}>{item}</Text>
         </TouchableOpacity>
       )
@@ -138,14 +90,11 @@ const ButtonsComponent = (infoButton) => {
     )
   }
 
-  if (isFollow) {
-    return <FollowButton />;
-  } else if (isMoreAction) {
-    return <MoreActionButton />;
+  if (isButton) {
+    return <NormalButton />;
   } else if (isHashtag) {
     return <HashtagButtons />;
-  }
-  else {
+  } else {
     return <></>
   }
 

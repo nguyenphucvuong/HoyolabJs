@@ -1,6 +1,5 @@
 import { StyleSheet, Text, View, TextInput, Animated, Pressable, Button, Modal, TouchableWithoutFeedback } from "react-native";
 import React, { useState, useRef, useCallback, useMemo } from "react";
-import { TapGestureHandler, State } from 'react-native-gesture-handler';
 
 
 import { appInfo } from "../constains/appInfo";
@@ -8,36 +7,19 @@ import { data } from "../constains/data";
 
 import { StyleGlobal } from "../styles/StyleGlobal";
 import {
-    AvatarComponent,
+    AvatarEx,
     ButtonsComponent,
     SkeletonComponent,
-    ImagesComponent,
-    IconComponent,
+    ImagesPostComponent,
 } from "./";
 import { Image } from "expo-image";
 import RowComponent from "../component/RowComponent";
+import AnimatedQuickCmtComponent from "./AnimatedQuickCmtComponent";
 
 
 
 const PostViewComponent = () => {
 
-
-    const [expanded, setExpanded] = useState(false);
-    const animation = useRef(new Animated.Value(0)).current;
-
-    const toggleExpand = (() => {
-        setExpanded(!expanded);
-
-        Animated.timing(animation, {
-            toValue: expanded ? 0 : 1,
-            duration: 400,
-            useNativeDriver: false,
-        }).start();
-    });
-    const height = animation.interpolate({
-        inputRange: [0, 1],
-        outputRange: [0, 50], // Adjust the outputRange values as per your requirement
-    });
 
     const HandleIsEmpty = (data) => {
         const view = data.view;
@@ -49,31 +31,12 @@ const PostViewComponent = () => {
     };
 
 
-    const [isVisible, setIsVisible] = useState(false);
-    const translateY = useState(new Animated.Value(appInfo.heightWindows))[0]; // Start offscreen
-
-    const handleShowInput = () => {
-        setIsVisible(true);
-        Animated.timing(translateY, {
-            toValue: 0,
-            duration: 300,
-            useNativeDriver: true,
-        }).start();
-    };
-
-    const handleHideInput = () => {
-        Animated.timing(translateY, {
-            toValue: appInfo.heightWindows,
-            duration: 300,
-            useNativeDriver: true,
-        }).start(() => setIsVisible(false));
-    };
 
 
     return (
         <View style={{
             ...styles.box,
-            backgroundColor: "pink",
+            // backgroundColor: "pink",
         }}>
 
             <View style={{ ...styles.content }}>
@@ -83,7 +46,7 @@ const PostViewComponent = () => {
                     style={{ alignItems: "center" }}
                 >
                     <SkeletonComponent isAvatar Data={data.state.avatar}>
-                        <AvatarComponent size={40} round={30} url={data.state.avatar} />
+                        <AvatarEx size={40} round={30} url={data.state.avatar} />
                     </SkeletonComponent>
 
                     <View
@@ -101,8 +64,19 @@ const PostViewComponent = () => {
                     </View>
 
                     <SkeletonComponent Data={data.state.userId} isButton>
-                        <ButtonsComponent color="rgba(121,141,218,1)" isFollow onPress={handleAd}>
-                            <Text style={{ ...StyleGlobal.text, color: "rgba(121,141,218,1)" }}>Theo dõi</Text>
+                        <ButtonsComponent isButton onPress={handleAd}
+                            style={{
+                                borderColor: "rgba(121,141,218,1)",
+                                borderRadius: 100,
+                                borderWidth: 2,
+                                justifyContent: "center",
+                                alignItems: "center",
+                                width: "22%",
+                                height: "50%",
+                                paddingHorizontal: "2%",
+                            }}
+                        >
+                            <Text style={{ ...StyleGlobal.text, color: "rgba(101,128,255,1)" }}>Theo dõi</Text>
                         </ButtonsComponent>
 
                     </SkeletonComponent>
@@ -117,7 +91,22 @@ const PostViewComponent = () => {
                                 alignItems: "center",
                             }}
                         >
-                            <ButtonsComponent isMoreAction onPress={handleAd} />
+                            <ButtonsComponent isButton onPress={handleAd}
+                                style={{
+                                    borderRadius: 30,
+                                    justifyContent: "center",
+                                    alignItems: "center",
+                                    width: "30%",
+                                    height: "30%",
+                                }}>
+                                <Image
+                                    style={{
+                                        width: "100%",
+                                        height: "100%",
+                                    }}
+                                    source={require('../../assets/dots_vertical-512.jpg')}
+                                    contentFit="cover" />
+                            </ButtonsComponent>
                         </View>
                     </SkeletonComponent>
 
@@ -162,7 +151,7 @@ const PostViewComponent = () => {
                             style={{
                                 marginTop: "2%",
                             }}>
-                            <ImagesComponent Data={data.state.images} />
+                            <ImagesPostComponent Data={data.state.images} />
                         </RowComponent>}
                 />
 
@@ -174,155 +163,7 @@ const PostViewComponent = () => {
                     <ButtonsComponent color="green" isHashtag onPress={handleAd} hashtag={data.state.hashtag} />
                 </RowComponent >
 
-                {/* Quick Comment */}
-
-                <Animated.View style={{ height, overflow: 'hidden', marginTop: 10 }}>
-                    <RowComponent
-                        height={40}
-                        style={{
-                            flexDirection: "row",
-                            alignItems: "center",
-                            alignContent: "center",
-                            justifyContent: "center",
-                        }}>
-                        <AvatarComponent size={40} round={30} url={data.state.avatar} style={{ marginRight: "3%" }} />
-                        <Pressable onPress={handleShowInput} style={{
-                            width: "100%",
-                            height: 30,
-                            flex: 1,
-                            borderRadius: 30,
-                            borderColor: "gray",
-                            borderWidth: 1,
-                            paddingLeft: 10,
-                            paddingRight: 10,
-                        }}>
-                            <TextInput
-                                placeholder="Viết bình luận..."
-                                editable={false}
-                            />
-                        </Pressable>
-
-                    </RowComponent>
-                </Animated.View>
-
-                <Modal
-                    visible={isVisible}
-                    transparent={true}
-                    onRequestClose={handleHideInput}
-                >
-                    <TouchableWithoutFeedback onPress={handleHideInput}>
-                        <View style={{ flex: 1, backgroundColor: 'rgba(0,0,0,0.5)' }} >
-                            <Animated.View style={[styles.animatedContainer, { transform: [{ translateY }] }]}>
-                                <TextInput
-                                    placeholder="Đăng bình luận"
-                                    style={styles.inputQuickCmt}
-                                    autoFocus={true}
-                                    multiline
-                                />
-                                <Button title="Gửi" onPress={handleHideInput} />
-                            </Animated.View>
-                        </View>
-                    </TouchableWithoutFeedback>
-                </Modal>
-
-                {/* Like, Comment, View */}
-                <HandleIsEmpty
-                    length={data.state.id.length}
-                    view={
-                        <RowComponent
-                            height={40}
-                            style={{
-                                flexDirection: "row",
-                            }}>
-                            <View
-                                style={{
-                                    width: "100%",
-                                    height: "100%",
-                                    alignItems: "center",
-                                    flex: 2,
-                                    flexDirection: "row",
-                                }}
-                            >
-                                <IconComponent
-                                    isTouchable
-                                    size={20}
-                                    icon={require('../../assets/view_icon_outside.png')}
-                                    style={{
-                                        marginRight: "2%",
-                                    }}
-                                />
-                                <Text
-                                    style={{
-                                        ...StyleGlobal.text,
-                                        color: "gray",
-                                    }}> 6k</Text>
-                            </View>
-                            <View
-                                style={{
-                                    width: "100%",
-                                    height: "100%",
-                                    justifyContent: "center",
-                                    alignItems: "center",
-                                    flex: 1,
-                                    flexDirection: "row",
-                                }}
-                            >
-                                <View
-                                    style={{
-                                        width: "100%",
-                                        height: "100%",
-                                        justifyContent: "center",
-                                        alignItems: "center",
-                                        flex: 1,
-                                        flexDirection: "row",
-                                    }}>
-                                    <IconComponent
-                                        isTouchable size={20}
-                                        icon={require('../../assets/comment_icon_outside.png')}
-                                        style={{
-                                            flex: 1,
-                                        }}
-                                    />
-                                    <Text
-                                        style={{
-                                            ...StyleGlobal.text,
-                                            color: "gray",
-                                            flex: 1,
-                                        }}> 6k</Text>
-                                </View>
-
-                                <View
-                                    style={{
-                                        width: "100%",
-                                        height: "100%",
-                                        justifyContent: "center",
-                                        alignItems: "center",
-                                        flex: 1,
-                                        flexDirection: "row",
-                                    }}>
-
-                                    <IconComponent
-                                        onPress={toggleExpand}
-                                        isTouchable
-                                        size={20}
-                                        icon={require('../../assets/like_icon_outside.png')}
-                                        style={{
-                                            flex: 1,
-                                        }}
-                                    />
-
-                                    <Text
-                                        style={{
-                                            ...StyleGlobal.text,
-                                            color: "gray",
-                                            flex: 1,
-                                        }}> 6k</Text>
-                                </View>
-                            </View>
-                        </RowComponent>}
-                />
-
-
+                <AnimatedQuickCmtComponent />
             </View>
         </View >
     )
@@ -346,30 +187,4 @@ const styles = StyleSheet.create({
         paddingHorizontal: "5%",
 
     },
-    animatedContainer: {
-        flex: 1,
-        position: 'absolute',
-        bottom: 0,
-        left: 0,
-        right: 0,
-        backgroundColor: '#fff',
-        padding: 20,
-        borderTopLeftRadius: 20,
-        borderTopRightRadius: 20,
-        shadowColor: '#000',
-        shadowOffset: { width: 0, height: -2 },
-        shadowOpacity: 0.2,
-        shadowRadius: 5,
-        elevation: 10,
-
-    },
-    inputQuickCmt: {
-        height: 150,
-        padding: 10,
-        borderRadius: 10,
-        backgroundColor: '#f0f0f0',
-        marginBottom: 20,
-    },
-
-
 })

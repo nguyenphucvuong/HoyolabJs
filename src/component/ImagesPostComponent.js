@@ -6,7 +6,7 @@ import * as ImageManipulator from "expo-image-manipulator";
 import RowComponent from './RowComponent';
 
 
-const ImagesComponent = (imagesInfo) => {
+const ImagesPostComponent = (imagesInfo) => {
     const [Data] = [imagesInfo.Data];
     const [imageWidth, setImageWidth] = useState(0);
     const [imageHeight, setImageHeight] = useState(0);
@@ -127,6 +127,6 @@ const ImagesComponent = (imagesInfo) => {
 
 }
 
-export default React.memo(ImagesComponent);
+export default React.memo(ImagesPostComponent);
 
 const styles = StyleSheet.create({})

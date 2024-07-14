@@ -1,20 +1,51 @@
-import React, { Children, useState } from 'react';
-import { View, TextInput, Button, Animated, StyleSheet, Dimensions, Pressable } from 'react-native';
-import { TapGestureHandler, State } from 'react-native-gesture-handler';
+import React, { Children, useRef, useState } from 'react';
+import { View, TextInput, Button, Animated, StyleSheet, Dimensions, Pressable, Modal, TouchableWithoutFeedback, Text } from 'react-native';
 import { appInfo } from '../constains/appInfo';
+import RowComponent from './RowComponent';
+import { Image } from 'expo-image';
+import {
+    AvatarEx,
+    IconComponent,
+    CmtBoxComponent,
+    ButtonsComponent
+} from '.';
+import { StyleGlobal } from "../styles/StyleGlobal";
 
-const { height } = Dimensions.get('window');
+import { data } from '../constains/data'
 
-const AnimatedQuickCmtComponent = (data) => {
-    const [children] = [data.children];
+
+const AnimatedQuickCmtComponent = (infoAnimated) => {
+    const [expanded, setExpanded] = useState(false);
+    const animation = useRef(new Animated.Value(0)).current;
+
+    const toggleExpand = (() => {
+        setExpanded(!expanded);
+        Animated.timing(animation, {
+            toValue: expanded ? 0 : 1,
+            duration: 400,
+            useNativeDriver: false,
+        }).start();
+    });
+
+    const height = animation.interpolate({
+        inputRange: [0, 1],
+        outputRange: [0, 50], // Adjust the outputRange values as per your requirement
+    });
+
+    const HandleIsEmpty = (data) => {
+        const view = data.view;
+        const length = data.length;
+        return length === 0 ? <></> : view;
+    }
+    const handleAd = () => {
+        console.log("toi day");
+    };
+
 
     const [isVisible, setIsVisible] = useState(false);
     const translateY = useState(new Animated.Value(appInfo.heightWindows))[0]; // Start offscreen
 
-
-
     const handleShowInput = () => {
-        console.log("true")
         setIsVisible(true);
         Animated.timing(translateY, {
             toValue: 0,
@@ -31,45 +62,164 @@ const AnimatedQuickCmtComponent = (data) => {
         }).start(() => setIsVisible(false));
     };
 
-    return (
-        <View style={styles.container}>
-            {/* <TapGestureHandler onHandlerStateChange={handleShowInput}> */}
-            <Pressable onPress={handleShowInput} style={styles.placeholder}>
-                <TextInput placeholder="Tôi có lời muốn nói..." style={styles.placeholderInput} editable={false} />
-            </Pressable>
-            {/* {children} */}
-            {/* </TapGestureHandler> */}
 
-            {isVisible && (
-                <Animated.View style={[styles.animatedContainer, { transform: [{ translateY }] }]}>
-                    <TextInput
-                        placeholder="Đăng bình luận"
-                        style={styles.input}
-                        autoFocus={true}
-                        multiline
-                    />
-                    <Button title="Gửi" onPress={handleHideInput} />
-                </Animated.View>
-            )}
-        </View>
+
+    return (
+        <>
+            {/* Quick Comment */}
+            <Animated.View style={{ height, overflow: 'hidden', marginTop: 10 }}>
+                <RowComponent
+                    height={40}
+                    style={{
+                        flexDirection: "row",
+                        alignItems: "center",
+                        alignContent: "center",
+                        justifyContent: "center",
+                    }}>
+                    <AvatarEx size={40} round={30} url={data.state.avatar} style={{ marginRight: "3%" }} />
+                    <Pressable onPress={handleShowInput} style={{
+                        width: "100%",
+                        height: 30,
+                        flex: 1,
+                        borderRadius: 30,
+                        borderColor: "gray",
+                        borderWidth: 1,
+                        paddingLeft: 10,
+                        paddingRight: 10,
+                    }}>
+                        <TextInput
+                            placeholder="Viết bình luận..."
+                            editable={false}
+                        />
+                    </Pressable>
+
+                </RowComponent>
+            </Animated.View>
+
+            {/* Quick Comment Box */}
+            <Modal
+                visible={isVisible}
+                transparent={true}
+                onRequestClose={handleHideInput}
+            >
+                <CmtBoxComponent translateY={translateY} handleHideInput={handleHideInput} />
+            </Modal>
+
+            {/* Like, Comment, View */}
+            <HandleIsEmpty
+                length={data.state.id.length}
+                view={
+                    <RowComponent
+                        height={40}
+                        style={{
+                            flexDirection: "row",
+                        }}>
+                        <View
+                            style={{
+                                width: "100%",
+                                height: "100%",
+                                alignItems: "center",
+                                flex: 2,
+                                flexDirection: "row",
+                            }}
+                        >
+                            <ButtonsComponent isButton
+                                style={{
+                                    marginRight: "2%",
+                                }}>
+                                <Image
+                                    style={{
+                                        width: 20,
+                                        height: 20,
+                                    }}
+                                    source={require('../../assets/view_icon_outside.png')}
+                                    contentFit="cover"
+                                />
+                            </ButtonsComponent>
+                            <Text
+                                style={{
+                                    ...StyleGlobal.text,
+                                    color: "gray",
+                                }}> 6k</Text>
+                        </View>
+                        <View
+                            style={{
+                                width: "100%",
+                                height: "100%",
+                                justifyContent: "center",
+                                alignItems: "center",
+                                flex: 1,
+                                flexDirection: "row",
+                            }}
+                        >
+                            <View
+                                style={{
+                                    width: "100%",
+                                    height: "100%",
+                                    justifyContent: "center",
+                                    alignItems: "center",
+                                    flex: 1,
+                                    flexDirection: "row",
+                                }}>
+                                <ButtonsComponent isButton
+                                    style={{
+                                        marginRight: "2%",
+                                    }}>
+                                    <Image
+                                        style={{
+                                            width: 20,
+                                            height: 20,
+                                        }}
+                                        source={require('../../assets/comment_icon_outside.png')}
+                                        contentFit="cover"
+                                    />
+                                </ButtonsComponent>
+                                <Text
+                                    style={{
+                                        ...StyleGlobal.text,
+                                        color: "gray",
+                                        flex: 1,
+                                    }}> 6k</Text>
+                            </View>
+
+                            <View
+                                style={{
+                                    width: "100%",
+                                    height: "100%",
+                                    justifyContent: "center",
+                                    alignItems: "center",
+                                    flex: 1,
+                                    flexDirection: "row",
+                                }}>
+                                <ButtonsComponent
+                                    onPress={toggleExpand}
+                                    isButton
+                                    style={{ marginRight: "2%", }}
+                                ><Image
+                                        style={{
+                                            width: 20,
+                                            height: 20,
+                                        }}
+                                        source={require('../../assets/like_icon_outside.png')}
+                                        contentFit="cover"
+                                    /></ButtonsComponent>
+                                <Text
+                                    style={{
+                                        ...StyleGlobal.text,
+                                        color: "gray",
+                                        flex: 1,
+                                    }}> 6k</Text>
+                            </View>
+                        </View>
+                    </RowComponent>}
+            />
+        </>
     );
 };
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        justifyContent: 'flex-end',
-    },
-    placeholder: {
-        padding: 10,
-        backgroundColor: '#fff',
-    },
-    placeholderInput: {
-        backgroundColor: '#f0f0f0',
-        padding: 10,
-        borderRadius: 5,
-    },
     animatedContainer: {
+        flex: 1,
         position: 'absolute',
         bottom: 0,
         left: 0,
@@ -83,14 +233,16 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.2,
         shadowRadius: 5,
         elevation: 10,
+
     },
-    input: {
+    inputQuickCmt: {
         height: 150,
         padding: 10,
         borderRadius: 10,
         backgroundColor: '#f0f0f0',
         marginBottom: 20,
     },
+
 });
 
 export default AnimatedQuickCmtComponent;
