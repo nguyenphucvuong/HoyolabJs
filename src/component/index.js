@@ -3,6 +3,16 @@ import SkeletonComponent from "./SkeletonComponent";
 import ButtonsComponent from "./ButtonsComponent";
 import ImagesPostComponent from "./ImagesPostComponent";
 // import AnimatedQuickCmtComponent from "./AnimatedQuickCmtComponent";
-import CmtBoxComponent from "./CmtBoxComponent";
+import IconsOptionComponent from "./commentBox/IconsOptionComponent";
+import AnimatedIconsOptionComponent from "./commentBox/AnimatedIconsOptionComponent";
+// import CmtBoxComponent from "./commentBox/CmtBoxComponent";
 
-export { AvatarEx, SkeletonComponent, ButtonsComponent, ImagesPostComponent, CmtBoxComponent };
+export {
+    AvatarEx,
+    SkeletonComponent,
+    ButtonsComponent,
+    ImagesPostComponent,
+    IconsOptionComponent,
+    AnimatedIconsOptionComponent,
+    // CmtBoxComponent,
+};

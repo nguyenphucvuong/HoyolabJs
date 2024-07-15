@@ -1,17 +1,17 @@
 import React, { Children, useRef, useState } from 'react';
 import { View, TextInput, Button, Animated, StyleSheet, Dimensions, Pressable, Modal, TouchableWithoutFeedback, Text } from 'react-native';
-import { appInfo } from '../constains/appInfo';
-import RowComponent from './RowComponent';
+import { appInfo } from '../../constains/appInfo';
+import RowComponent from '../RowComponent';
 import { Image } from 'expo-image';
 import {
     AvatarEx,
     IconComponent,
-    CmtBoxComponent,
     ButtonsComponent
-} from '.';
-import { StyleGlobal } from "../styles/StyleGlobal";
+} from '..';
+import CmtBoxComponent from './CmtBoxComponent';
+import { StyleGlobal } from "../../styles/StyleGlobal";
 
-import { data } from '../constains/data'
+import { data } from '../../constains/data'
 
 
 const AnimatedQuickCmtComponent = (infoAnimated) => {
@@ -132,7 +132,7 @@ const AnimatedQuickCmtComponent = (infoAnimated) => {
                                         width: 20,
                                         height: 20,
                                     }}
-                                    source={require('../../assets/view_icon_outside.png')}
+                                    source={require('../../../assets/view_icon_outside.png')}
                                     contentFit="cover"
                                 />
                             </ButtonsComponent>
@@ -170,7 +170,7 @@ const AnimatedQuickCmtComponent = (infoAnimated) => {
                                             width: 20,
                                             height: 20,
                                         }}
-                                        source={require('../../assets/comment_icon_outside.png')}
+                                        source={require('../../../assets/comment_icon_outside.png')}
                                         contentFit="cover"
                                     />
                                 </ButtonsComponent>
@@ -200,7 +200,7 @@ const AnimatedQuickCmtComponent = (infoAnimated) => {
                                             width: 20,
                                             height: 20,
                                         }}
-                                        source={require('../../assets/like_icon_outside.png')}
+                                        source={require('../../../assets/like_icon_outside.png')}
                                         contentFit="cover"
                                     /></ButtonsComponent>
                                 <Text

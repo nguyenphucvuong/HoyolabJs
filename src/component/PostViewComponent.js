@@ -14,7 +14,7 @@ import {
 } from "./";
 import { Image } from "expo-image";
 import RowComponent from "../component/RowComponent";
-import AnimatedQuickCmtComponent from "./AnimatedQuickCmtComponent";
+import AnimatedQuickCmtComponent from "./commentBox/AnimatedQuickCmtComponent";
 
 
 
