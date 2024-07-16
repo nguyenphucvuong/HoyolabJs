@@ -14,77 +14,70 @@ const CmtBoxComponent = (infoCmt) => {
     const [translateY, handleHideInput] = [infoCmt.translateY, infoCmt.handleHideInput];
 
     return (
-        <View style={{ flex: 1 }} >
-            <TouchableWithoutFeedback onPress={handleHideInput}>
-                <View style={{ flex: 1, backgroundColor: 'rgba(0,0,0,0.5)' }} ></View>
-            </TouchableWithoutFeedback>
-
-            <Animated.View style={[styles.animatedContainer, { transform: [{ translateY }] }]}>
-                <RowComponent width={"100%"} height={"auto"} style={{
-                    // backgroundColor: "pink",
-                    alignItems: "center",
+        <Animated.View style={[styles.animatedContainer, { transform: [{ translateY }] }]}>
+            <RowComponent width={"100%"} height={"auto"} style={{
+                // backgroundColor: "pink",
+                alignItems: "center",
+                justifyContent: "center",
+            }}>
+                <Text style={{
+                    flex: 1,
+                    color: "gray",
                     justifyContent: "center",
+                    alignItems: "center",
                 }}>
-                    <Text style={{
-                        flex: 1,
-                        color: "gray",
+                    Đăng bình luận
+                </Text>
+                <ButtonsComponent isButton onPress={handleHideInput}>
+                    <Image
+                        source={require('../../../assets/close_icon.png')}
+                        style={{
+                            height: 30,
+                            width: 30,
+                        }}
+                    />
+                </ButtonsComponent>
+
+            </RowComponent>
+            <TextInput
+                placeholder="Tôi có lời muốn nói..."
+                placeholderTextColor={"rgba(0,0,0,0.3)"}
+                style={[styles.inputQuickCmt, {}]}
+                autoFocus={true}
+                multiline
+            />
+            <View style={{
+                flex: 1,
+                // backgroundColor: "pink",
+                width: "100%",
+                height: 35,
+                flexDirection: "row",
+            }}>
+                <IconsOptionComponent />
+                <ButtonsComponent
+                    isButton
+                    onPress={handleHideInput}
+                    style={{
+                        borderRadius: 30,
                         justifyContent: "center",
                         alignItems: "center",
+                        width: 65,
+                        height: "100%",
+                        paddingHorizontal: "2%",
+                        backgroundColor: "rgba(101,128,255,1)",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        marginLeft: "2%",
+
                     }}>
-                        Đăng bình luận
-                    </Text>
-                    <ButtonsComponent isButton onPress={handleHideInput}>
-                        <Image
-                            source={require('../../../assets/close_icon.png')}
-                            style={{
-                                height: 30,
-                                width: 30,
-                            }}
-                        />
-                    </ButtonsComponent>
-
-                </RowComponent>
-                <TextInput
-                    placeholder="Tôi có lời muốn nói..."
-                    placeholderTextColor={"rgba(0,0,0,0.3)"}
-                    style={[styles.inputQuickCmt, {}]}
-                    autoFocus={true}
-                    multiline
-                />
-                <View style={{
-                    flex: 1,
-                    // backgroundColor: "pink",
-                    width: "100%",
-                    height: 35,
-                    flexDirection: "row",
-                }}>
-                    <IconsOptionComponent />
-                    <ButtonsComponent
-                        isButton
-                        onPress={handleHideInput}
+                    <Text
                         style={{
-                            borderRadius: 30,
-                            justifyContent: "center",
-                            alignItems: "center",
-                            width: 65,
-                            height: "100%",
-                            paddingHorizontal: "2%",
-                            backgroundColor: "rgba(101,128,255,1)",
-                            justifyContent: "center",
-                            alignItems: "center",
-                            marginLeft: "2%",
-
-                        }}>
-                        <Text
-                            style={{
-                                color: "white",
-                                fontSize: 12,
-                            }} >Đăng</Text>
-                    </ButtonsComponent>
-                </View>
-            </Animated.View>
-        </View>
-
+                            color: "white",
+                            fontSize: 12,
+                        }} >Đăng</Text>
+                </ButtonsComponent>
+            </View>
+        </Animated.View>
     )
 }
 

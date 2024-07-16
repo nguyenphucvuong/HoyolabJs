@@ -4,7 +4,6 @@ import ButtonsComponent from "./ButtonsComponent";
 import ImagesPostComponent from "./ImagesPostComponent";
 // import AnimatedQuickCmtComponent from "./AnimatedQuickCmtComponent";
 import IconsOptionComponent from "./commentBox/IconsOptionComponent";
-import AnimatedIconsOptionComponent from "./commentBox/AnimatedIconsOptionComponent";
 // import CmtBoxComponent from "./commentBox/CmtBoxComponent";
 
 export {
@@ -13,6 +12,5 @@ export {
     ButtonsComponent,
     ImagesPostComponent,
     IconsOptionComponent,
-    AnimatedIconsOptionComponent,
     // CmtBoxComponent,
 };

@@ -1,16 +1,18 @@
-import { StyleSheet, Text, View, TouchableOpacity, FlatList } from "react-native";
+import { StyleSheet, Text, View, TouchableOpacity, FlatList, Pressable } from "react-native";
 import React from "react";
 import { Image } from 'expo-image';
 
 const ButtonsComponent = (infoButton) => {
-  const [children, color, style, render, isButton, isFollow, onPress, isMoreAction, isHashtag, hashtag, isLike, isShowCmt, isSendCmt] = [
+  const [children, color, style, render, isButton, isPressable, isFollow, onPress, onLongPress, isMoreAction, isHashtag, hashtag, isLike, isShowCmt, isSendCmt] = [
     infoButton.children,
     infoButton.color,
     infoButton.style,
     infoButton.render,
     infoButton.isButton,
+    infoButton.isPressable,
     infoButton.isFollow,
     infoButton.onPress,
+    infoButton.onLongPress,
     infoButton.isMoreAction,
     infoButton.isHashtag,
     infoButton.hashtag,
@@ -19,12 +21,31 @@ const ButtonsComponent = (infoButton) => {
     infoButton.isSendCmt,
   ];
 
+  const PressableButton = () => {
+
+    return (
+      <Pressable
+        // onPress={onPress}
+        onPress={onPress}
+        onLongPress={onLongPress}
+        activeOpacity={0.6}
+        style={[{
+          color: color,
+        }, style && style]}
+      >
+        {children}
+      </Pressable>
+    );
+  }
 
   const NormalButton = () => {
 
     return (
       <TouchableOpacity
+        // onPress={onPress}
         onPress={onPress}
+        onLongPress={onLongPress}
+        activeOpacity={0.6}
         style={[{
           color: color,
         }, style && style]}
@@ -94,6 +115,8 @@ const ButtonsComponent = (infoButton) => {
     return <NormalButton />;
   } else if (isHashtag) {
     return <HashtagButtons />;
+  } else if (isPressable) {
+    return <PressableButton />;
   } else {
     return <></>
   }

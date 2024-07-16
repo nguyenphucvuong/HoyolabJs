@@ -15,6 +15,7 @@ import {
 import { Image } from "expo-image";
 import RowComponent from "../component/RowComponent";
 import AnimatedQuickCmtComponent from "./commentBox/AnimatedQuickCmtComponent";
+import MoreOptionPostComponent from "./MoreOptionPostComponent";
 
 
 
@@ -77,8 +78,8 @@ const PostViewComponent = () => {
                             }}
                         >
                             <Text style={{ ...StyleGlobal.text, color: "rgba(101,128,255,1)" }}>Theo dõi</Text>
-                        </ButtonsComponent>
 
+                        </ButtonsComponent>
                     </SkeletonComponent>
 
                     <SkeletonComponent Data={data.state.userId} isButton>
@@ -91,7 +92,7 @@ const PostViewComponent = () => {
                                 alignItems: "center",
                             }}
                         >
-                            <ButtonsComponent isButton onPress={handleAd}
+                            {/* <ButtonsComponent isButton onPress={handleAd}
                                 style={{
                                     borderRadius: 30,
                                     justifyContent: "center",
@@ -106,7 +107,9 @@ const PostViewComponent = () => {
                                     }}
                                     source={require('../../assets/dots_vertical-512.jpg')}
                                     contentFit="cover" />
-                            </ButtonsComponent>
+                            </ButtonsComponent> */}
+                            <MoreOptionPostComponent />
+
                         </View>
                     </SkeletonComponent>
 
@@ -164,6 +167,7 @@ const PostViewComponent = () => {
                 </RowComponent >
 
                 <AnimatedQuickCmtComponent />
+
             </View>
         </View >
     )

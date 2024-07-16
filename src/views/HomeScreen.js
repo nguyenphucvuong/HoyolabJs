@@ -11,7 +11,12 @@ const HomeScreen = () => {
   return (
 
     <SafeAreaView>
-      <ScrollView>
+      <ScrollView
+        style={[{
+          backgroundColor: "pink",
+        }]}
+        showsVerticalScrollIndicator={false}
+      >
         <View style={StyleGlobal.container}>
           <PostViewComponent></PostViewComponent>
           <PostViewComponent></PostViewComponent>
@@ -31,6 +36,5 @@ export default React.memo(HomeScreen);
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'flex-end',
   },
 });

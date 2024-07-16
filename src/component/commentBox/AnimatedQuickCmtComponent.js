@@ -8,6 +8,7 @@ import {
     IconComponent,
     ButtonsComponent
 } from '..';
+import { ModalPop } from '../../modals'
 import CmtBoxComponent from './CmtBoxComponent';
 import { StyleGlobal } from "../../styles/StyleGlobal";
 
@@ -37,11 +38,6 @@ const AnimatedQuickCmtComponent = (infoAnimated) => {
         const length = data.length;
         return length === 0 ? <></> : view;
     }
-    const handleAd = () => {
-        console.log("toi day");
-    };
-
-
     const [isVisible, setIsVisible] = useState(false);
     const translateY = useState(new Animated.Value(appInfo.heightWindows))[0]; // Start offscreen
 
@@ -61,7 +57,6 @@ const AnimatedQuickCmtComponent = (infoAnimated) => {
             useNativeDriver: true,
         }).start(() => setIsVisible(false));
     };
-
 
 
     return (
@@ -97,13 +92,13 @@ const AnimatedQuickCmtComponent = (infoAnimated) => {
             </Animated.View>
 
             {/* Quick Comment Box */}
-            <Modal
+            <ModalPop
                 visible={isVisible}
                 transparent={true}
                 onRequestClose={handleHideInput}
             >
                 <CmtBoxComponent translateY={translateY} handleHideInput={handleHideInput} />
-            </Modal>
+            </ModalPop>
 
             {/* Like, Comment, View */}
             <HandleIsEmpty
@@ -193,6 +188,7 @@ const AnimatedQuickCmtComponent = (infoAnimated) => {
                                 }}>
                                 <ButtonsComponent
                                     onPress={toggleExpand}
+                                    onLongPress={() => console.log("long press")}
                                     isButton
                                     style={{ marginRight: "2%", }}
                                 ><Image
