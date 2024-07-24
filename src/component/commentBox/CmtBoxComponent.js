@@ -6,7 +6,8 @@ import {
     ButtonsComponent,
     IconsOptionComponent,
 } from '../';
-
+import { LinearGradient } from "expo-linear-gradient";
+import { appInfo } from '../../constains/appInfo';
 // import ButtonsComponent from '../ButtonsComponent';
 // import IconsOptionComponent from './IconsOptionComponent';
 
@@ -42,42 +43,64 @@ const CmtBoxComponent = (infoCmt) => {
             <TextInput
                 placeholder="Tôi có lời muốn nói..."
                 placeholderTextColor={"rgba(0,0,0,0.3)"}
-                style={[styles.inputQuickCmt, {}]}
+                style={[styles.inputQuickCmt, {
+                    height: "auto",
+
+                }]}
                 autoFocus={true}
                 multiline
             />
+            <View style={{
+                borderBottomWidth: 1,
+                borderColor: "rgba(0,0,0,0.1)",
+                width: appInfo.widthWindows,
+                left: -20,
+            }}>
+
+            </View>
             <View style={{
                 flex: 1,
                 // backgroundColor: "pink",
                 width: "100%",
                 height: 35,
                 flexDirection: "row",
+                marginVertical: 10,
             }}>
                 <IconsOptionComponent />
-                <ButtonsComponent
-                    isButton
-                    onPress={handleHideInput}
-                    style={{
-                        borderRadius: 30,
-                        justifyContent: "center",
-                        alignItems: "center",
-                        width: 65,
-                        height: "100%",
-                        paddingHorizontal: "2%",
-                        backgroundColor: "rgba(101,128,255,1)",
-                        justifyContent: "center",
-                        alignItems: "center",
-                        marginLeft: "2%",
+                <LinearGradient
+                    start={{ x: 0, y: 0 }} end={{ x: 0.1999, y: 0 }}
+                    colors={["rgba(255,255,255,0)", "rgba(255,255,255,1)"]}
 
-                    }}>
-                    <Text
+                    style={{
+                        paddingLeft: "8.5%",
+                        width: "auto",
+                        height: "100%",
+                    }}
+                >
+                    <ButtonsComponent
+                        isButton
+                        onPress={handleHideInput}
                         style={{
-                            color: "white",
-                            fontSize: 12,
-                        }} >Đăng</Text>
-                </ButtonsComponent>
+                            borderRadius: 30,
+                            justifyContent: "center",
+                            alignItems: "center",
+                            width: 65,
+                            height: "100%",
+                            paddingHorizontal: "2%",
+                            backgroundColor: "rgba(101,128,255,1)",
+                            justifyContent: "center",
+                            alignItems: "center",
+                        }}>
+                        <Text
+                            style={{
+                                color: "white",
+                                fontSize: 12,
+                            }} >Đăng</Text>
+                    </ButtonsComponent>
+                </LinearGradient>
+
             </View>
-        </Animated.View>
+        </Animated.View >
     )
 }
 

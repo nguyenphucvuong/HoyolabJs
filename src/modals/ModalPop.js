@@ -2,10 +2,11 @@ import { Modal, StyleSheet, Text, TouchableWithoutFeedback, View } from 'react-n
 import React from 'react'
 
 const ModalPop = (infoModal) => {
-    const [chidlren, visible, onRequestClose] = [
+    const [chidlren, visible, onRequestClose, onShow] = [
         infoModal.children,
         infoModal.visible,
         infoModal.onRequestClose,
+        infoModal.onShow,
     ];
 
 
@@ -17,6 +18,7 @@ const ModalPop = (infoModal) => {
                 visible={visible}
                 transparent={true}
                 onRequestClose={onRequestClose}
+                onShow={onShow}
             >
                 <View style={{ flex: 1 }} >
                     <TouchableWithoutFeedback onPress={onRequestClose}>

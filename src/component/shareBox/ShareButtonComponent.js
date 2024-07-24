@@ -11,42 +11,36 @@ const ShareButtonComponent = (infoButton) => {
         infoButton.styleImg,
         infoButton.styleText,
         infoButton.onPress,
+        infoButton.url,
+        infoButton.text,
     ];
 
 
-    const ShareRow = () => {
-        return (
-            <ButtonsComponent isPressable
-                onPress={onPress}
-                style={[styles.btnLogo, styleBtn && styleBtn]}>
-                {children}
-                <Image source={require(url)}
-                    style={[styles.iconBtnLogo, styleImg && styleImg]} />
-                <Text style={[styles.textShare, styleText && styleText]}>
-                    {text}
-                </Text>
-            </ButtonsComponent >
-        )
-    }
 
-    const ShareCollumn = () => {
-        return (
+
+    const SharePop = () => {
+        return isRow ? (
             <ButtonsComponent isPressable
                 onPress={onPress}
-                style={[styles.btnLogo, styleBtn && styleBtn]}>
-                {children}
-                <Image source={require(url)}
-                    style={[styles.iconBtnLogo, styleImg && styleImg]} />
-                <Text style={[styles.textShare, styleText && styleText]}>
-                    {text}
-                </Text>
+                style={[styles.btnLogoRow, styleBtn && styleBtn]}>
+                <Image source={url}
+                    style={[styles.iconBtnLogoRow, styleImg && styleImg]} />
+                <Text style={[styles.textShareRow, styleText && styleText]}>{text}</Text>
+            </ButtonsComponent>
+        ) : (
+            <ButtonsComponent isPressable
+                onPress={onPress}
+                style={[styles.btnLogoCol, styleBtn && styleBtn]}>
+                <Image source={url}
+                    style={[styles.iconBtnLogoCol, styleImg && styleImg]} />
+                <Text style={[styles.textShareCol, styleText && styleText]}>{text}</Text>
             </ButtonsComponent >
         )
     }
 
     return (
         <>
-            {isRow ? <ShareRow /> : <ShareCollumn />}
+            <SharePop />
         </>
     )
 
@@ -55,9 +49,38 @@ const ShareButtonComponent = (infoButton) => {
 export default ShareButtonComponent
 
 const styles = StyleSheet.create({
-    btnLogo: {
+    btnLogoCol: {
         justifyContent: "center",
-        height: "100%",
+        height: "auto",
         flexDirection: "collumn",
+        paddingBottom: 10,
+        marginHorizontal: 4,
+    },
+    textShareCol: {
+        fontSize: 15,
+        textAlign: "center",
+    },
+    iconBtnLogoCol: {
+        width: 60,
+        height: 60,
+        marginBottom: 5,
+    },
+
+    btnLogoRow: {
+        width: "100%",
+        flexDirection: "row",
+        backgroundColor: "yellow",
+        alignItems: "center",
+        marginVertical: 10,
+    },
+    textShareRow: {
+        color: "gray",
+        fontSize: 13,
+        textAlign: "center",
+    },
+    iconBtnLogoRow: {
+        width: 35,
+        height: 35,
+        marginRight: 5,
     },
 })

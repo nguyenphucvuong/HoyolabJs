@@ -8,6 +8,7 @@ import {
     ButtonsComponent,
 } from './';
 import RowComponent from "../component/RowComponent";
+import ShareButtonComponent from './shareBox/ShareButtonComponent';
 
 
 const MoreOptionPostComponent = () => {
@@ -88,8 +89,7 @@ const MoreOptionPostComponent = () => {
                         style={{
                             borderBottomWidth: 1,
                             borderBottomColor: "rgba(0,0,0,0.1)",
-                            marginVertical: 13,
-                            marginBottom: 300,
+                            paddingVertical: 10,
                         }}>
                         <ScrollView
                             horizontal={true}
@@ -98,52 +98,73 @@ const MoreOptionPostComponent = () => {
                             style={{
                             }}>
                             {/* Discord */}
-                            <ButtonsComponent isPressable
-                                onPress={() => console.log("Discord")}
-                                style={styles.btnLogo}>
-                                <Image source={require('../../assets/discord_icon.png')}
-                                    style={[styles.iconBtnLogo, {}]} />
-                                <Text style={styles.textShare}>
-                                    Discord
-                                </Text>
-                            </ButtonsComponent>
+                            <ShareButtonComponent
+                                url={require('../../assets/discord_icon.png')}
+                                text={"Discord"}
+                                onPress={() => console.log("Discord")} />
                             {/* Facebook */}
-                            <ButtonsComponent isPressable
-                                onPress={() => console.log("Facebook")}
-                                style={styles.btnLogo}>
-                                <Image source={require('../../assets/discord_icon.png')}
-                                    style={styles.iconBtnLogo} />
-                                <Text style={styles.textShare}>
-                                    Facebook
-                                </Text>
-                            </ButtonsComponent>
+                            <ShareButtonComponent
+                                url={require('../../assets/discord_icon.png')}
+                                text={"Facebook"}
+                                onPress={() => console.log("Facebook")} />
                             {/* Twitter */}
-                            <ButtonsComponent isPressable
-                                onPress={() => console.log("Twitter")}
-                                style={{
-                                    justifyContent: "center",
-                                    alignItems: "center",
-                                    height: "100%",
-                                    flexDirection: "collumn",
-                                }}>
-                                <Image source={require('../../assets/discord_icon.png')}
-                                    style={styles.iconBtnLogo} />
-                                <Text style={[styles.textShare,]}>
-                                    Twitter
-                                </Text>
-                            </ButtonsComponent>
+                            <ShareButtonComponent
+                                url={require('../../assets/discord_icon.png')}
+                                text={"Twitter"}
+                                onPress={() => console.log("Twitter")} />
                             {/* Reddit */}
-                            <ButtonsComponent isPressable
-                                onPress={() => console.log("Reddit")}
-                                style={styles.btnLogo}>
-                                <Image source={require('../../assets/discord_icon.png')}
-                                    style={styles.iconBtnLogo} />
-                                <Text style={styles.textShare}>
-                                    Reddit
-                                </Text>
-
-                            </ButtonsComponent>
-
+                            <ShareButtonComponent
+                                url={require('../../assets/discord_icon.png')}
+                                text={"Reddit"}
+                                onPress={() => console.log("Reddit")} />
+                        </ScrollView>
+                    </RowComponent>
+                    <RowComponent width={"100%"} height={"auto"}
+                        style={{
+                            borderBottomWidth: 1,
+                            borderBottomColor: "rgba(0,0,0,0.1)",
+                        }}>
+                        <ScrollView
+                            horizontal={false}
+                            showsHorizontalScrollIndicator={false}
+                            scrollEnabled={true}
+                            style={{
+                            }}>
+                            {/* Discord */}
+                            <ShareButtonComponent
+                                isRow
+                                url={require('../../assets/discord_icon.png')}
+                                text={"Discord"}
+                                onPress={() => console.log("Discord")} />
+                            {/* Facebook */}
+                            <ShareButtonComponent
+                                isRow
+                                url={require('../../assets/discord_icon.png')}
+                                text={"Facebook"}
+                                onPress={() => console.log("Facebook")} />
+                            {/* Twitter */}
+                            <ShareButtonComponent
+                                isRow
+                                url={require('../../assets/discord_icon.png')}
+                                text={"Twitter"}
+                                onPress={() => console.log("Twitter")} />
+                            {/* Reddit */}
+                            <ShareButtonComponent
+                                isRow
+                                url={require('../../assets/discord_icon.png')}
+                                text={"Reddit"}
+                                onPress={() => console.log("Reddit")} />
+                            <ShareButtonComponent
+                                isRow
+                                url={require('../../assets/discord_icon.png')}
+                                text={"Twitter"}
+                                onPress={() => console.log("Twitter")} />
+                            {/* Reddit */}
+                            <ShareButtonComponent
+                                isRow
+                                url={require('../../assets/discord_icon.png')}
+                                text={"Reddit"}
+                                onPress={() => console.log("Reddit")} />
                         </ScrollView>
                     </RowComponent>
                 </Animated.View>
@@ -174,21 +195,6 @@ const styles = StyleSheet.create({
         elevation: 10,
 
     },
-    textShare: {
-        color: "gray",
-        fontSize: 15,
-        textAlign: "center",
-    },
 
 
-    btnLogo: {
-        justifyContent: "center",
-        height: "100%",
-        flexDirection: "collumn",
-    },
-    iconBtnLogo: {
-        width: 65,
-        height: 65,
-        marginHorizontal: 4,
-    },
 })

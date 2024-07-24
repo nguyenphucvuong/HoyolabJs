@@ -12,18 +12,18 @@ const IconsOptionComponent = () => {
             style={{
                 // backgroundColor: "green",
                 flexDirection: "row",
-            }}
-        >
+                marginLeft: -16,
+                left: 16,
+            }}>
             <ButtonsComponent
                 isButton
                 // onPress={aaaaa}
                 style={{
-                    backgroundColor: "red",
+                    // backgroundColor: "red",
                     marginRight: 10,
                     justifyContent: "center",
                     alignItems: "center",
-                }}
-            >
+                }}>
                 <Image
                     style={{
                         width: 28,
@@ -35,12 +35,11 @@ const IconsOptionComponent = () => {
                 isButton
                 // onPress={aaaaa}
                 style={{
-                    backgroundColor: "red",
+                    // backgroundColor: "red",
                     marginHorizontal: 10,
                     justifyContent: "center",
                     alignItems: "center",
-                }}
-            >
+                }}>
                 <Image
                     style={{
                         width: 28,
@@ -52,12 +51,11 @@ const IconsOptionComponent = () => {
                 isButton
                 // onPress={aaaaa}
                 style={{
-                    backgroundColor: "red",
+                    // backgroundColor: "red",
                     marginHorizontal: 10,
                     justifyContent: "center",
                     alignItems: "center",
-                }}
-            >
+                }}>
                 <Image
                     style={{
                         width: 28,
@@ -69,12 +67,11 @@ const IconsOptionComponent = () => {
                 isButton
                 // onPress={aaaaa}
                 style={{
-                    backgroundColor: "red",
+                    // backgroundColor: "red",
                     marginHorizontal: 10,
                     justifyContent: "center",
                     alignItems: "center",
-                }}
-            >
+                }}>
                 <Image
                     style={{
                         width: 28,
@@ -86,12 +83,11 @@ const IconsOptionComponent = () => {
                 isButton
                 // onPress={aaaaa}
                 style={{
-                    backgroundColor: "red",
+                    // backgroundColor: "red",
                     marginHorizontal: 10,
                     justifyContent: "center",
                     alignItems: "center",
-                }}
-            >
+                }}>
                 <Image
                     style={{
                         width: 28,
@@ -103,12 +99,11 @@ const IconsOptionComponent = () => {
                 isButton
                 // onPress={aaaaa}
                 style={{
-                    backgroundColor: "red",
+                    // backgroundColor: "red",
                     marginHorizontal: 10,
                     justifyContent: "center",
                     alignItems: "center",
-                }}
-            >
+                }}>
                 <Image
                     style={{
                         width: 28,
@@ -116,11 +111,6 @@ const IconsOptionComponent = () => {
                     }}
                     source={require('../../../assets/smile_icon_cmt.png')} />
             </ButtonsComponent>
-
-
-
-
-
         </ScrollView>
     )
 }
