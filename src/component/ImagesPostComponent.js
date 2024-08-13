@@ -2,9 +2,9 @@
 import React, { useEffect, useState } from 'react'
 import { Image } from 'expo-image';
 import { appInfo } from '../constains/appInfo'
-import * as ImageManipulator from "expo-image-manipulator";
 import RowComponent from './RowComponent';
 import { useNavigation } from '@react-navigation/native';
+import sizeImage from '../utils/sizeImage';
 
 const ImagesPostComponent = (imagesInfo) => {
     const navigation = useNavigation();
@@ -12,16 +12,13 @@ const ImagesPostComponent = (imagesInfo) => {
     const [Data] = [imagesInfo.Data];
     const [imageWidth, setImageWidth] = useState(0);
     const [imageHeight, setImageHeight] = useState(0);
-    // console.log("width", imageWidth, "height", imageHeight);
 
-    const handleImage = async (uri) => {
-        const { width, height } = await ImageManipulator.manipulateAsync(uri, [], {
-            compress: 0.5,
-            format: ImageManipulator.SaveFormat.JPEG,
-        });
+    const handleImage = async (url) => {
+        const { width, height } = await new sizeImage(url).sizeImage();
         setImageWidth(width);
         setImageHeight(height);
-    };
+    }
+
 
     useEffect(() => {
         Data.forEach(element => {
@@ -49,8 +46,8 @@ const ImagesPostComponent = (imagesInfo) => {
         }
 
 
-        // eslint-disable-next-line react/prop-types
-        return <Image onTouchStart={() => navigation.navigate("picture", { Data: Data[0] })}
+         
+        return <Image onTouchEndCapture={() => navigation.navigate("picture", { Data: Data[0] })}
             source={{ uri: Data[0] }}
             style={CheckHeightReturnStyle}
         />

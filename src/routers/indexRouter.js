@@ -1,14 +1,14 @@
 
 import React from 'react'
 import { NavigationContainer } from '@react-navigation/native'
-import HomeTab from './homeTab'
+import HomeRouter from './homeRouter'
 
 const IndexRouter = () => {
 
 
     return (
         <NavigationContainer >
-            <HomeTab />
+            <HomeRouter />
         </NavigationContainer>
     )
 }
