@@ -1,5 +1,5 @@
-import { StyleSheet, Text, View, TextInput, Animated, Pressable, Button, Modal, TouchableWithoutFeedback } from "react-native";
-import React, { useState, useRef, useCallback, useMemo } from "react";
+import { StyleSheet, Text, View, } from "react-native";
+import React from "react";
 
 
 import { appInfo } from "../constains/appInfo";
@@ -12,7 +12,7 @@ import {
     SkeletonComponent,
     ImagesPostComponent,
 } from "./";
-import { Image } from "expo-image";
+
 import RowComponent from "../component/RowComponent";
 import AnimatedQuickCmtComponent from "./commentBox/AnimatedQuickCmtComponent";
 import MoreOptionPostComponent from "./MoreOptionPostComponent";

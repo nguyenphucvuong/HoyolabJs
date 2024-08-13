@@ -1,11 +1,11 @@
-import React, { Children, useRef, useState } from 'react';
-import { View, TextInput, Button, Animated, StyleSheet, Dimensions, Pressable, Modal, TouchableWithoutFeedback, Text } from 'react-native';
+/* eslint-disable no-undef */
+import React, { useRef, useState } from 'react';
+import { View, TextInput, Animated, Pressable, Text, Easing } from 'react-native';
 import { appInfo } from '../../constains/appInfo';
 import RowComponent from '../RowComponent';
 import { Image } from 'expo-image';
 import {
     AvatarEx,
-    IconComponent,
     ButtonsComponent
 } from '..';
 import { ModalPop } from '../../modals'
@@ -15,16 +15,20 @@ import { StyleGlobal } from "../../styles/StyleGlobal";
 import { data } from '../../constains/data'
 
 
-const AnimatedQuickCmtComponent = (infoAnimated) => {
-    const [expanded, setExpanded] = useState(false);
+const AnimatedQuickCmtComponent = () => {
+    // const [expanded, setExpanded] = useState(false);
+    var expanded = false;
     const animation = useRef(new Animated.Value(0)).current;
 
     const toggleExpand = (() => {
-        setExpanded(!expanded);
+        // setExpanded(!expanded);
+        expanded = !expanded;
         Animated.timing(animation, {
-            toValue: expanded ? 0 : 1,
+            toValue: expanded ? 1 : 0,
             duration: 400,
             useNativeDriver: false,
+            easing: Easing.inOut(Easing.ease),
+
         }).start();
     });
 
@@ -63,6 +67,7 @@ const AnimatedQuickCmtComponent = (infoAnimated) => {
         <>
             {/* Quick Comment */}
             <Animated.View style={{ height, overflow: 'hidden', marginTop: 10 }}>
+                {/* <Animated.View style={{ overflow: 'hidden', marginTop: 10 }}> */}
                 <RowComponent
                     height={40}
                     style={{
@@ -127,6 +132,8 @@ const AnimatedQuickCmtComponent = (infoAnimated) => {
                                         width: 20,
                                         height: 20,
                                     }}
+
+
                                     source={require('../../../assets/view_icon_outside.png')}
                                     contentFit="cover"
                                 />
@@ -213,32 +220,32 @@ const AnimatedQuickCmtComponent = (infoAnimated) => {
     );
 };
 
-const styles = StyleSheet.create({
-    animatedContainer: {
-        flex: 1,
-        position: 'absolute',
-        bottom: 0,
-        left: 0,
-        right: 0,
-        backgroundColor: '#fff',
-        padding: 20,
-        borderTopLeftRadius: 20,
-        borderTopRightRadius: 20,
-        shadowColor: '#000',
-        shadowOffset: { width: 0, height: -2 },
-        shadowOpacity: 0.2,
-        shadowRadius: 5,
-        elevation: 10,
+// const styles = StyleSheet.create({
+//     animatedContainer: {
+//         flex: 1,
+//         position: 'absolute',
+//         bottom: 0,
+//         left: 0,
+//         right: 0,
+//         backgroundColor: '#fff',
+//         padding: 20,
+//         borderTopLeftRadius: 20,
+//         borderTopRightRadius: 20,
+//         shadowColor: '#000',
+//         shadowOffset: { width: 0, height: -2 },
+//         shadowOpacity: 0.2,
+//         shadowRadius: 5,
+//         elevation: 10,
 
-    },
-    inputQuickCmt: {
-        height: 150,
-        padding: 10,
-        borderRadius: 10,
-        backgroundColor: '#f0f0f0',
-        marginBottom: 20,
-    },
+//     },
+//     inputQuickCmt: {
+//         height: 150,
+//         padding: 10,
+//         borderRadius: 10,
+//         backgroundColor: '#f0f0f0',
+//         marginBottom: 20,
+//     },
 
-});
+// });
 
 export default AnimatedQuickCmtComponent;

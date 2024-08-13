@@ -1,12 +1,14 @@
-import { StyleSheet, Text, View } from 'react-native'
+
 import React, { useEffect, useState } from 'react'
 import { Image } from 'expo-image';
 import { appInfo } from '../constains/appInfo'
 import * as ImageManipulator from "expo-image-manipulator";
 import RowComponent from './RowComponent';
-
+import { useNavigation } from '@react-navigation/native';
 
 const ImagesPostComponent = (imagesInfo) => {
+    const navigation = useNavigation();
+
     const [Data] = [imagesInfo.Data];
     const [imageWidth, setImageWidth] = useState(0);
     const [imageHeight, setImageHeight] = useState(0);
@@ -30,29 +32,28 @@ const ImagesPostComponent = (imagesInfo) => {
 
 
     const OneImageContent = () => {
-        return imageWidth > imageHeight ? (
-            <Image
-                source={{ uri: Data[0] }}
-                style={{
-                    width: "100%",
-                    height: "100%",
-                    borderRadius: 10,
-                }}
-            />
-        ) : (
-            <Image
-                source={{ uri: Data[0] }}
-                style={{
-                    width: imageWidth > appInfo.widthWindows * 0.5 ? appInfo.widthWindows * 0.5 : "100%",
-                    // height: imageHeight > 250 ? 250 : imageHeight,
-                    height: 250,
-                    minWidth: appInfo.widthWindows * 0.4,
-                    maxWidth: appInfo.widthWindows * 0.5,
-                    minHeight: 200,
-                    // maxHeight: 250,
-                    borderRadius: 10,
-                }} />
-        )
+
+        const CheckHeightReturnStyle = imageWidth > imageHeight ? {
+            width: "100%",
+            height: "100%",
+            borderRadius: 10,
+        } : {
+            width: imageWidth > appInfo.widthWindows * 0.5 ? appInfo.widthWindows * 0.5 : "100%",
+            // height: imageHeight > 250 ? 250 : imageHeight,
+            height: 250,
+            minWidth: appInfo.widthWindows * 0.4,
+            maxWidth: appInfo.widthWindows * 0.5,
+            minHeight: 200,
+            // maxHeight: 250,
+            borderRadius: 10,
+        }
+
+
+        // eslint-disable-next-line react/prop-types
+        return <Image onTouchStart={() => navigation.navigate("picture", { Data: Data[0] })}
+            source={{ uri: Data[0] }}
+            style={CheckHeightReturnStyle}
+        />
     }
 
     const TwoOrThreeImageContent = () => {
@@ -128,5 +129,3 @@ const ImagesPostComponent = (imagesInfo) => {
 }
 
 export default React.memo(ImagesPostComponent);
-
-const styles = StyleSheet.create({})

@@ -1,7 +1,6 @@
-import { FlatList, ScrollView, StyleSheet, Text, TouchableOpacity, View, TextInput, Animated } from "react-native";
+import { ScrollView, View, } from "react-native";
 import React from "react";
 import { StyleGlobal } from "../styles/StyleGlobal";
-import { SafeAreaView } from "react-native-safe-area-context";
 
 
 import PostViewComponent from "../component/PostViewComponent";
@@ -10,21 +9,21 @@ const HomeScreen = () => {
 
   return (
 
-    <SafeAreaView>
-      <ScrollView
-        style={[{
-          backgroundColor: "pink",
-        }]}
-        showsVerticalScrollIndicator={false}
-      >
-        <View style={StyleGlobal.container}>
-          <PostViewComponent></PostViewComponent>
-          <PostViewComponent></PostViewComponent>
-          <PostViewComponent></PostViewComponent>
 
-        </View>
-      </ScrollView>
-    </SafeAreaView >
+    <ScrollView
+      style={[{
+        backgroundColor: "pink",
+      }]}
+      showsVerticalScrollIndicator={false}
+    >
+      <View style={StyleGlobal.container}>
+        <PostViewComponent></PostViewComponent>
+        <PostViewComponent></PostViewComponent>
+        <PostViewComponent></PostViewComponent>
+
+      </View>
+    </ScrollView>
+
 
 
 
@@ -33,8 +32,4 @@ const HomeScreen = () => {
 
 export default React.memo(HomeScreen);
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-});
+
