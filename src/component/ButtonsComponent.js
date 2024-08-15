@@ -1,24 +1,18 @@
-import { StyleSheet, Text, View, TouchableOpacity, FlatList, Pressable } from "react-native";
+import { Text, TouchableOpacity, FlatList, Pressable } from "react-native";
 import React from "react";
 import { Image } from 'expo-image';
 
 const ButtonsComponent = (infoButton) => {
-  const [children, color, style, render, isButton, isPressable, isFollow, onPress, onLongPress, isMoreAction, isHashtag, hashtag, isLike, isShowCmt, isSendCmt] = [
+  const [children, color, style, isButton, isPressable, onPress, onLongPress, isHashtag, hashtag,] = [
     infoButton.children,
     infoButton.color,
     infoButton.style,
-    infoButton.render,
     infoButton.isButton,
     infoButton.isPressable,
-    infoButton.isFollow,
     infoButton.onPress,
     infoButton.onLongPress,
-    infoButton.isMoreAction,
     infoButton.isHashtag,
     infoButton.hashtag,
-    infoButton.isLike,
-    infoButton.isShowCmt,
-    infoButton.isSendCmt,
   ];
 
   const PressableButton = () => {
@@ -80,6 +74,7 @@ const ButtonsComponent = (infoButton) => {
               width: 15,
               height: 15,
             }}
+            // eslint-disable-next-line no-undef
             source={require('../../assets/hashtag_icon.png')}
             contentFit="cover" />
           <Text
@@ -126,4 +121,3 @@ const ButtonsComponent = (infoButton) => {
 
 export default React.memo(ButtonsComponent);
 
-const styles = StyleSheet.create({});

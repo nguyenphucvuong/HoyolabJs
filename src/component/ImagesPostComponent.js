@@ -46,7 +46,7 @@ const ImagesPostComponent = (imagesInfo) => {
         }
 
 
-         
+
         return <Image onTouchEndCapture={() => navigation.navigate("picture", { Data: Data[0] })}
             source={{ uri: Data[0] }}
             style={CheckHeightReturnStyle}
@@ -81,27 +81,32 @@ const ImagesPostComponent = (imagesInfo) => {
         const ThreeImageContent = () => {
             return (
                 <RowComponent
-                    maxHeight={appInfo.widthWindows * 0.7}
-                    minHeight={appInfo.widthWindows * 0.45}
+                    maxHeight={appInfo.widthWindows * 0.6}
+                    minHeight={imageHeight > 150 ? 150 : appInfo.widthWindows * 0.3}
                     style={{
                         justifyContent: "space-between",
                         overflow: "hidden",
                         borderRadius: 10,
+                        backgroundColor: "red",
+                        height: imageHeight > 150 ? 150 : imageHeight,
                     }}>
                     <Image
                         source={{ uri: Data[0] }}
+                        onTouchEndCapture={() => navigation.navigate("picture", { Data: Data, Select: 0 })}
                         style={{
                             width: "32%",
                             height: "100%",
                         }} />
                     <Image
                         source={{ uri: Data[1] }}
+                        onTouchEndCapture={() => navigation.navigate("picture", { Data: Data, Select: 1 })}
                         style={{
                             width: "33%",
                             height: "100%",
                         }} />
                     <Image
                         source={{ uri: Data[2] }}
+                        onTouchEndCapture={() => navigation.navigate("picture", { Data: Data, Select: 2 })}
                         style={{
                             width: "32%",
                             height: "100%",
