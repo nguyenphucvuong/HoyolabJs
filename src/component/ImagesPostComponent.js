@@ -47,7 +47,7 @@ const ImagesPostComponent = (imagesInfo) => {
 
 
 
-        return <Image onTouchEndCapture={() => navigation.navigate("picture", { Data: Data[0] })}
+        return <Image onTouchEndCapture={() => navigation.navigate("picture", { Data: [Data[0]] })}
             source={{ uri: Data[0] }}
             style={CheckHeightReturnStyle}
         />
@@ -64,12 +64,14 @@ const ImagesPostComponent = (imagesInfo) => {
                     }}>
                     <Image
                         source={{ uri: Data[0] }}
+                        onTouchEndCapture={() => navigation.navigate("picture", { Data: Data, Select: 0 })}
                         style={{
                             width: "49%",
                             height: "100%",
                         }} />
                     <Image
                         source={{ uri: Data[1] }}
+                        onTouchEndCapture={() => navigation.navigate("picture", { Data: Data, Select: 1 })}
                         style={{
                             width: "49%",
                             height: "100%",
@@ -87,7 +89,6 @@ const ImagesPostComponent = (imagesInfo) => {
                         justifyContent: "space-between",
                         overflow: "hidden",
                         borderRadius: 10,
-                        backgroundColor: "red",
                         height: imageHeight > 150 ? 150 : imageHeight,
                     }}>
                     <Image

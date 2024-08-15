@@ -220,32 +220,6 @@ const AnimatedQuickCmtComponent = () => {
     );
 };
 
-// const styles = StyleSheet.create({
-//     animatedContainer: {
-//         flex: 1,
-//         position: 'absolute',
-//         bottom: 0,
-//         left: 0,
-//         right: 0,
-//         backgroundColor: '#fff',
-//         padding: 20,
-//         borderTopLeftRadius: 20,
-//         borderTopRightRadius: 20,
-//         shadowColor: '#000',
-//         shadowOffset: { width: 0, height: -2 },
-//         shadowOpacity: 0.2,
-//         shadowRadius: 5,
-//         elevation: 10,
 
-//     },
-//     inputQuickCmt: {
-//         height: 150,
-//         padding: 10,
-//         borderRadius: 10,
-//         backgroundColor: '#f0f0f0',
-//         marginBottom: 20,
-//     },
-
-// });
 
 export default AnimatedQuickCmtComponent;

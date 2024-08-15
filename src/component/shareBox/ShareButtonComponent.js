@@ -1,11 +1,11 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Text } from 'react-native'
 import React from 'react'
 import ButtonsComponent from '../ButtonsComponent'
 import { Image } from 'expo-image';
 
 const ShareButtonComponent = (infoButton) => {
-    const [children, isRow, styleBtn, styleImg, styleText, onPress, url, text] = [
-        infoButton.children,
+    const [isRow, styleBtn, styleImg, styleText, onPress, url, text] = [
+
         infoButton.isRow,
         infoButton.styleBtn,
         infoButton.styleImg,
